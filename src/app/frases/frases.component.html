@@ -1,0 +1,61 @@
+<div class="container-fluid">
+  <!-- HTML form mark up -->
+  <form [formGroup]="entryFormFrases" novalidate>
+    <div class="card">
+      <div class="card-header">
+        <div class="float-left"><h3 class="text-info">Frases</h3></div>
+        <div class="float-right">
+          <!-- HTML markup for form mode New or Edit -->
+          <h5 class="text-warning font-italic">{{ formMode }}</h5>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="alert alert-danger" [hidden]="!error" translate>Erro ao realizar o upload</div>
+        <div class="form-group">
+          <label for="id">Id</label>
+          <label class="d-block">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="id"
+              autocomplete="id"
+              [placeholder]="'Auto Assigned Id' | translate"
+              readonly
+            />
+            <span hidden translate>Id</span>
+            <small
+              [hidden]="entryFormFrases.controls.id.valid || entryFormFrases.controls.id.untouched"
+              class="text-danger"
+              translate
+            >
+              Id é obrigatório
+            </small>
+          </label>
+          <label for="arquivo">Arquivo</label>
+          <label class="d-block">
+            <input
+              #imageInput
+              hidden="true"
+              id="arquivo"
+              type="file"
+              onclick="this.value=null"
+              (change)="imageInputChange($event)"
+              accept="image/png, image/jpeg"
+            />
+            <button class="btn btn-primary" (click)="imageInput.click()">Escolha uma imagem (PNG, JPG)</button>
+            <div class="card-body">
+              <div class="col-sm"></div>
+            </div>
+            <mat-progress-bar mode="determinate" value="{{ progress }}"></mat-progress-bar>
+          </label>
+        </div>
+        <div class="card-body">
+          <div class="col-sm"></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <a class="btn text-dark" [routerLink]="['/listahq']"><i class="fa fa-arrow-left"></i> Back</a>
+      </div>
+    </div>
+  </form>
+</div>

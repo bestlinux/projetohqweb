@@ -1,0 +1,86 @@
+<div class="container-fluid">
+  <!-- HTML form mark up -->
+  <form [formGroup]="entryFormEditora" novalidate>
+    <div class="card">
+      <div class="card-header">
+        <div class="float-left"><h3 class="text-info">Adicionar Editora</h3></div>
+        <div class="float-right">
+          <!-- HTML markup for form mode New or Edit -->
+          <h5 class="text-warning font-italic">{{ formMode }}</h5>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="alert alert-danger" [hidden]="!error" translate>Nome da corretora esta incorreto</div>
+        <div class="form-group">
+          <label for="id">Id</label>
+          <label class="d-block">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="id"
+              autocomplete="id"
+              [placeholder]="'Auto Assigned Id' | translate"
+              readonly
+            />
+            <span hidden translate>Id</span>
+            <small
+              [hidden]="entryFormEditora.controls.id.valid || entryFormEditora.controls.id.untouched"
+              class="text-danger"
+              translate
+            >
+              Id é obrigatório
+            </small>
+          </label>
+
+          <label for="nome">Nome</label>
+          <label class="d-block">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="nome"
+              autocomplete="nome"
+              [placeholder]="'Coloque o nome da Editora' | translate"
+              required
+            />
+            <span hidden translate>Nome</span>
+            <small
+              [hidden]="entryFormEditora.controls.nome.valid || entryFormEditora.controls.nome.untouched"
+              class="text-danger"
+              translate
+            >
+              O nome da Editora é obrigatório
+            </small>
+          </label>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="float-left">
+          <!-- HTML markup for Create button -->
+          <button
+            (click)="onCreate()"
+            class="btn btn-primary w-20"
+            type="submit"
+            [disabled]="entryFormEditora.invalid || !isAddNew"
+            *ngIf="this.isAddNew"
+          >
+            <span translate><i class="fas fa-plus"></i> Create</span>
+          </button>
+
+          <button
+            (click)="onDelee()"
+            class="btn btn-danger w-20"
+            type="submit"
+            [disabled]="entryFormEditora.invalid || isAddNew"
+            *ngIf="!this.isAddNew"
+          >
+            <span translate><i class="fas fa-trash-alt"></i> Delete</span>
+          </button>
+        </div>
+      </div>
+      <div class="card-footer">
+        <!-- HTML markup for Back button -->
+        <a class="btn text-dark" [routerLink]="['/listaeditora']"><i class="fa fa-arrow-left"></i> Back</a>
+      </div>
+    </div>
+  </form>
+</div>

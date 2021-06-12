@@ -1,0 +1,54 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/" translate>APP_NAME</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      aria-controls="navbar-menu"
+      aria-label="Toggle navigation"
+      (click)="toggleMenu()"
+      [attr.aria-expanded]="!menuHidden"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="navbar-menu" class="collapse navbar-collapse float-xs-none" [ngbCollapse]="menuHidden">
+      <div class="navbar-nav">
+        <!--<a class="nav-item nav-link text-uppercase" routerLink="/master" routerLinkActive="active">
+          <i class="fas fa-home"></i>
+          <span translate>Master</span>
+        </a>-->
+        <!--<a class="nav-item nav-link text-uppercase" routerLink="/detail" routerLinkActive="active">
+          <i class="fa fa-plus"></i>
+          <span translate>Detail</span>
+        </a> -->
+        <a class="nav-item nav-link text-uppercase" routerLink="/listahq" routerLinkActive="active">
+          <i class="fas fa-home"></i>
+          <span translate>HQs</span>
+        </a>
+        <a class="nav-item nav-link text-uppercase" routerLink="/hq" routerLinkActive="active">
+          <i class="fa fa-plus"></i>
+          <span translate>Adicionar HQ</span>
+        </a>
+        <a class="nav-item nav-link text-uppercase" routerLink="/editora" routerLinkActive="active">
+          <i class="fa fa-plus"></i>
+          <span translate>Adicionar Editora</span>
+        </a>
+        <a class="nav-item nav-link text-uppercase" routerLink="/listaeditora" routerLinkActive="active">
+          <i class="fas fa-home"></i>
+          <span translate>Editoras</span>
+        </a>
+        <a class="nav-item nav-link text-uppercase" routerLink="/frases" routerLinkActive="active">
+          <i class="fas fa-file-upload"></i>
+          <span translate>Frases</span>
+        </a>
+        <a class="nav-item nav-link text-uppercase" routerLink="/user" routerLinkActive="active">
+          <i class="fa fa-star"></i>
+          <span translate>Usuarios</span>
+        </a>
+      </div>
+      <!--<div class="navbar-nav ml-auto">
+        <app-language-selector inNavbar="true" menuClass="dropdown-menu dropdown-menu-right"></app-language-selector>
+      </div>-->
+    </div>
+  </nav>
+</header>
