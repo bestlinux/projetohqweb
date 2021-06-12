@@ -21,7 +21,7 @@ npm install
 npm start
 ```
 
-# Project structure
+# Estrutura do Projeto
 
 ```
 dist/                        web app production build
