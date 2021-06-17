@@ -60,13 +60,13 @@ export class ApiEndpointsService {
 
   public postHQEndpoint = (): string => this.createUrl('Hq');
 
+  public getHQsEndpoint = (): string => this.createUrl('Hq');
+
   public deleteHQByIdEndpoint = (id: string): string => this.createUrlWithPathVariables('Hq', [id]);
 
   public putHQPagedEndpoint = (id: string): string => this.createUrlWithPathVariables('Hq', [id]);
 
   public postHQsPagedEndpoint = (): string => this.createUrl('Hq/Paged');
-
-  public postImageUploadEndpoint = (): string => this.createUrl('Hq/UploadImage');
 
   public postHQsPagedSearchWebEndpoint = (): string => this.createUrl('Hq/PagedSearchWeb');
 
@@ -106,6 +106,44 @@ export class ApiEndpointsService {
     ])}?${queryString.toString()}`;
   }
 
+  public getHQAdvancedSearchEndpoint(   
+    categoria : number,
+    genero : number,
+    status : string,
+    formato : number,
+    lido : number,
+    numeroEdicao : number,
+    anoLancamento : string,
+    titulo : string,
+    roteiro : string,
+    personagens : string,
+    editora : string
+  ): string {
+    const queryString: QueryStringParameters = new QueryStringParameters();
+    /*queryString.push('anoLancamento', anoLancamento);
+    queryString.push('numeroEdicao', numeroEdicao);
+    queryString.push('editora', editora);
+    queryString.push('categoria', categoria);
+    queryString.push('genero', genero);
+    queryString.push('status', status);
+    queryString.push('roteiro', roteiro);
+    queryString.push('personagens', personagens);
+    queryString.push('lido', lido);*/
+    return `${this.createUrlWithPathVariables('Hq/BuscaAvancada', [     
+      categoria,
+      genero,
+      status,
+      formato,
+      lido,
+      numeroEdicao,     
+      anoLancamento,
+      titulo,
+      roteiro,
+      personagens,
+      editora,
+    ])}?${queryString.toString()}`;
+  }
+
   //************************ */
 
   //ENDPOINT EDITORA
@@ -121,6 +159,18 @@ export class ApiEndpointsService {
   public deleteEditoraByIdEndpoint = (id: string): string => this.createUrlWithPathVariables('Editora', [id]);
 
   //********************** */
+
+  //ENDPOINT FRASES
+
+  public getFrasesEndpoint = (): string => this.createUrl('Frases');
+
+  public postImageUploadEndpoint = (): string => this.createUrl('Frases/UploadImage');
+
+  public postFrasesPagedEndpoint = (): string => this.createUrl('Frases/Paged');
+
+  public deleteFraseByIdEndpoint = (id: string): string => this.createUrlWithPathVariables('Frases', [id]);
+
+  //************************* */
 
   public deletePositionByIdEndpoint = (id: string): string => this.createUrlWithPathVariables('Positions', [id]);
 

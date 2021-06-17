@@ -15,7 +15,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <img class="img-full" src="http://127.0.0.1:8887/{{ capaFull }}" alt="Angular" />
+            <img class="img-full" src="http://127.0.0.1:8887/Capas/{{ capaFull }}" alt="Angular" />
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -49,7 +49,7 @@
               <th>{{ hq.licenciador }}</th>
               <th *ngIf="hq.lido === 0">Não</th>
               <th *ngIf="hq.lido === 1">Sim</th>
-              <td><img class="img-responsive" src="http://127.0.0.1:8887/{{ hq.capa }}" alt="Angular" /></td>
+              <td><img class="img-responsive" src="http://127.0.0.1:8887/Capas/{{ hq.capa }}" alt="Angular" /></td>
               <td>
                 <button
                   (click)="exibeImagemFull(hq.capa)"

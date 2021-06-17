@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DataTablesModule } from 'angular-datatables';
 //import { ToastComponent } from '@shared/toast/toast.component';
 //import { ToastsContainer } from './toasts-container.component';
 
@@ -24,6 +25,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     RxReactiveFormsModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
+    DataTablesModule
   ],
   declarations: [FrasesComponent],
 })

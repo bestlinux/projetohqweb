@@ -53,6 +53,7 @@ export class HQComponent implements OnInit {
   isLoading = true;
   isLoadingCreate = false;
   spinner: any;
+  capa: string;
 
   constructor(
     public toastService: ToastService,
@@ -193,6 +194,7 @@ export class HQComponent implements OnInit {
   onCreate() {
     this.isLoadingCreate = true;
     this.hqsSelected = this.selection.selected;
+    log.debug('onCreate: ', this.hqsSelected);
     this.create(this.hqsSelected);
   }
 
@@ -298,6 +300,7 @@ export class HQComponent implements OnInit {
       (resp: DataResponseHQ) => {
         //Assign data to class-level model object.
         this.hq = resp.data;
+        this.capa = this.hq.capa;
         //Populate reactive form controls with model object properties.
         this.entryForm.setValue({
           id: this.hq.id,
@@ -310,6 +313,12 @@ export class HQComponent implements OnInit {
           status: this.hq.status,
           formato: this.hq.formato,
           lido: this.hq.lido,
+          licenciador: this.hq.licenciador,
+          numeroPaginas: this.hq.numeroPaginas,
+          preco: this.hq.preco,
+          dtPublicacao: this.hq.dataPublicacao,
+          personagens: this.hq.personagens,
+          roteiro: this.hq.desenhosRoteirosArteFinalCores,
           //genero: this.generos
         });
       },
@@ -341,6 +350,8 @@ export class HQComponent implements OnInit {
       if (resp.succeeded) {
         this.isLoadingCreate = false;
         this.showSuccess('Sucesso!', 'HQ(s) cadastrada(s)');
+        this.entryForm.reset();
+        this.selection.clear();
       } else {
         this.showError('Erro!', resp.message);
         this.isLoadingCreate = false;
@@ -369,6 +380,12 @@ export class HQComponent implements OnInit {
       status: [''],
       formato: [''],
       lido: [''],
+      licenciador: [''],
+      numeroPaginas: [''],
+      preco: [''],
+      dtPublicacao: [''],
+      personagens: [''],
+      roteiro: ['']
     });
   }
   // ngbmodal service

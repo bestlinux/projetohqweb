@@ -8,15 +8,17 @@ const routes: Routes = [
       path: 'listaeditora',
       loadChildren: () => import('./cadastro/listaeditora.module').then((m) => m.ListaEditoraModule),
     },
+    { path: 'listahqavancado', loadChildren: () => import('./cadastro/listahqavancado.module').then((m) => m.ListaHQAvancadoModule) },
+    { path: 'home', loadChildren: () => import('./home/home.module').then((m) => m.HomeModule) },
     { path: 'detail', loadChildren: () => import('./detail/detail.module').then((m) => m.DetailModule) },
     { path: 'hq', loadChildren: () => import('./cadastro/hq.module').then((m) => m.HQModule) },
     { path: 'listahq', loadChildren: () => import('./cadastro/listahq.module').then((m) => m.ListaHQModule) },
     { path: 'editora', loadChildren: () => import('./cadastro/editora.module').then((m) => m.EditoraModule) },
     { path: 'frases', loadChildren: () => import('./frases/frases.module').then((m) => m.FrasesModule) },
-    { path: '', loadChildren: () => import('./cadastro/listahq.module').then((m) => m.ListaHQModule) },
+    { path: '', loadChildren: () => import('./home/home.module').then((m) => m.HomeModule) },
   ]),
   // Fallback when no prior route is matched
-  { path: '**', redirectTo: '/listahq', pathMatch: 'full' },
+  { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];
 
 @NgModule({

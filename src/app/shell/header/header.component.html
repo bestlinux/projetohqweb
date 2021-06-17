@@ -1,5 +1,6 @@
+<div id="primary-nav">
 <header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary">
     <a class="navbar-brand" href="/" translate>APP_NAME</a>
     <button
       class="navbar-toggler"
@@ -12,7 +13,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div id="navbar-menu" class="collapse navbar-collapse float-xs-none" [ngbCollapse]="menuHidden">
-      <div class="navbar-nav">
+      <div class="navbar-nav nav-fill w-100" >
         <!--<a class="nav-item nav-link text-uppercase" routerLink="/master" routerLinkActive="active">
           <i class="fas fa-home"></i>
           <span translate>Master</span>
@@ -21,9 +22,9 @@
           <i class="fa fa-plus"></i>
           <span translate>Detail</span>
         </a> -->
-        <a class="nav-item nav-link text-uppercase" routerLink="/listahq" routerLinkActive="active">
+        <a class="nav-item nav-link text-uppercase" routerLink="/home" routerLinkActive="active">
           <i class="fas fa-home"></i>
-          <span translate>HQs</span>
+          <span translate>Home</span>
         </a>
         <a class="nav-item nav-link text-uppercase" routerLink="/hq" routerLinkActive="active">
           <i class="fa fa-plus"></i>
@@ -33,18 +34,22 @@
           <i class="fa fa-plus"></i>
           <span translate>Adicionar Editora</span>
         </a>
+        <a class="nav-item nav-link text-uppercase" routerLink="/listahq" routerLinkActive="active">
+          <i class="fas fa-list"></i>
+          <span translate>HQs</span>
+        </a>
         <a class="nav-item nav-link text-uppercase" routerLink="/listaeditora" routerLinkActive="active">
-          <i class="fas fa-home"></i>
+          <i class="fas fa-list"></i>
           <span translate>Editoras</span>
+        </a>
+        <a class="nav-item nav-link text-uppercase" routerLink="/listahqavancado" routerLinkActive="active">
+          <i class="fas fa-list"></i>
+          <span translate>Busca Avançada de HQS</span>
         </a>
         <a class="nav-item nav-link text-uppercase" routerLink="/frases" routerLinkActive="active">
           <i class="fas fa-file-upload"></i>
           <span translate>Frases</span>
-        </a>
-        <a class="nav-item nav-link text-uppercase" routerLink="/user" routerLinkActive="active">
-          <i class="fa fa-star"></i>
-          <span translate>Usuarios</span>
-        </a>
+        </a>      
       </div>
       <!--<div class="navbar-nav ml-auto">
         <app-language-selector inNavbar="true" menuClass="dropdown-menu dropdown-menu-right"></app-language-selector>
@@ -52,3 +57,4 @@
     </div>
   </nav>
 </header>
+</div>
