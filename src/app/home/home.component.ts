@@ -50,7 +50,8 @@ export class HomeComponent implements OnInit {
   autorFrase: string;
   tituloFraseHQ: string;
   arquivoFrase: string;
-  
+  totalHqs: number;
+
   constructor(
     private apiHttpService: ApiHttpService, private apiEndpointsService: ApiEndpointsService) {}
 
@@ -59,6 +60,7 @@ export class HomeComponent implements OnInit {
     .get(this.apiEndpointsService.getHQsEndpoint(), this.dataTablesParameters)
     .subscribe((resp: DataTablesResponse) => {
       this.hqs = resp.data;     
+      this.totalHqs = this.hqs.length;
       log.debug(this.hqs);
 
       this.hqCard1 = this.hqs[Math.floor(Math.random() *  this.hqs.length)];

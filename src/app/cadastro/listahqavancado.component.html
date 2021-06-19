@@ -149,9 +149,9 @@
                 <!-- Position Column -->
                 <ng-container matColumnDef="titulo">
                   <th mat-header-cell *matHeaderCellDef>Titulo</th>
-                  <td mat-cell *matCellDef="let hq">{{ hq.titulo }}</td>
+                  <td mat-cell *matCellDef="let hq"><a [routerLink]="['/hq', hq.id, hq.titulo]">{{ hq.titulo }}</a></td>
                 </ng-container>
-  
+
                 <!-- Name Column -->
                 <ng-container matColumnDef="linkDetalhes">
                   <th mat-header-cell *matHeaderCellDef>Link Detalhes</th>

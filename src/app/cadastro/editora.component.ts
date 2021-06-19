@@ -118,10 +118,8 @@ export class EditoraComponent implements OnInit {
   delete(id: any): void {
     this.apiHttpService.delete(this.apiEndpointsService.deleteEditoraByIdEndpoint(id), id).subscribe(
       (resp: any) => {
-        log.debug(resp);
         this.showSuccess('Sucesso!', 'Editora excluida');
-        this.entryFormEditora.reset();
-        this.isAddNew = true;
+        this.router.navigateByUrl('/listaeditora');
       },
       (error) => {
         log.debug(error);
@@ -135,6 +133,7 @@ export class EditoraComponent implements OnInit {
       this.id = resp.data; //guid return in data
       if (resp.succeeded) {
         this.showSuccess('Sucesso!', 'Editora cadastrada');
+        this.router.navigateByUrl('/listaeditora');
       } else {
         this.showError('Erro!', resp.message);
       }

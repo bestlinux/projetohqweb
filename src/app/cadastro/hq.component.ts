@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DataTablesResponse } from '@shared/classes/data-tables-response';
 import { Logger } from '@core';
@@ -14,7 +14,6 @@ import { Editora } from '@app/@shared/models/editora';
 import { Constants } from '@app/config/constants';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
-//import { Directive, ElementRef } from '@angular/core';
 
 const log = new Logger('hq');
 
@@ -32,6 +31,7 @@ export class HQComponent implements OnInit {
   formMode = 'New';
   sub: any;
   id: any;
+  titulo: any;
   entryForm: FormGroup;
   error: string | undefined;
   hq: HQ;
@@ -54,6 +54,8 @@ export class HQComponent implements OnInit {
   isLoadingCreate = false;
   spinner: any;
   capa: string;
+  voltarHqAvancado: boolean = false;
+  idBuscaAvancada: any;
 
   constructor(
     public toastService: ToastService,
@@ -62,17 +64,13 @@ export class HQComponent implements OnInit {
     private apiHttpService: ApiHttpService,
     private apiEndpointsService: ApiEndpointsService,
     private confirmationDialogService: ConfirmationDialogService,
-    private constants: Constants
-  ) //{ nativeElement }: ElementRef<HTMLImageElement>
-  {
-    //const supports = 'loading' in HTMLImageElement.prototype;
-
-    /*if (supports) {
-      nativeElement.setAttribute('loading', 'lazy');
-    }*/
-
+    private constants: Constants,
+    private router: Router,
+  ) 
+  {    
     this.createForm();
   }
+
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
@@ -124,14 +122,29 @@ export class HQComponent implements OnInit {
   ngOnInit() {
     this.sub = this.route.params.subscribe((params) => {
       this.id = params['id'];
+      this.idBuscaAvancada = params['titulo'];
+
+      //VOLTA PARA A TELA DE LISTA DE HQS
       if (this.id !== undefined) {
         this.read(this.route.snapshot.paramMap.get('id'));
         this.formMode = 'Edit';
-      } else {
+        this.voltarHqAvancado = false;
+      }     
+      else {
         this.isAddNew = true;
         this.formMode = 'New';
       }
+
+      //VOLTA PARA A TELA DE BUSCA AVANCADA
+      if (this.idBuscaAvancada !== undefined)
+      {
+        this.read(this.route.snapshot.paramMap.get('id'));
+        this.formMode = 'Edit';
+        this.voltarHqAvancado = true;
+      }
+
     });
+
     this.loadEditora();
     this.loadGenero();
     this.loadCategoria();
@@ -142,7 +155,7 @@ export class HQComponent implements OnInit {
     //this.categorias = this.constants.categorias;
     this.readyToCreate = false;
     this.spinner = false;
-    log.debug('ngOnInit:', this.id);
+    //log.debug('ngOnInit:', this.id);
   }
 
   loadLido(): void {
@@ -194,7 +207,6 @@ export class HQComponent implements OnInit {
   onCreate() {
     this.isLoadingCreate = true;
     this.hqsSelected = this.selection.selected;
-    log.debug('onCreate: ', this.hqsSelected);
     this.create(this.hqsSelected);
   }
 
@@ -212,21 +224,19 @@ export class HQComponent implements OnInit {
       this.selectedStatus,
       this.selectedFormato
     );
-
-    log.debug('OnSearch: ', this.entryForm.value);
-    log.debug('OnSearch: ', this.entryForm.get('titulo').value);
   }
 
   // Handle Update button click
   onUpdate() {
     this.put(this.entryForm.get('id').value, this.entryForm.value);
     this.showSuccess('Sucesso!', 'HQ atualizada');
+    this.router.navigateByUrl('/listahq');
   }
 
   // Handle Delete button click
   onDelete() {
     this.confirmationDialogService
-      .confirm('HQ deletion', 'Are you sure you want to delete?')
+      .confirm('Excluir HQ', 'Tem certeza que deseja excluir ?')
       .then((confirmed) => {
         if (confirmed) {
           this.delete(this.entryForm.get('id').value);
@@ -263,10 +273,6 @@ export class HQComponent implements OnInit {
     if (anoLancamento == '' || anoLancamento == null) anoLancamento = null;
 
     if (numeroEdicao == '' || numeroEdicao == null) numeroEdicao = 0;
-
-    console.log(genero);
-    console.log(categoria);
-    console.log(this.selectedGenero);
 
     this.apiHttpService
       .get(
@@ -332,10 +338,8 @@ export class HQComponent implements OnInit {
   delete(id: any): void {
     this.apiHttpService.delete(this.apiEndpointsService.deleteHQByIdEndpoint(id), id).subscribe(
       (resp: any) => {
-        log.debug(resp);
-        this.showSuccess('Great job!', 'Data is deleted');
-        this.entryForm.reset();
-        this.isAddNew = true;
+        this.showSuccess('Sucesso!', 'HQ excluida');
+        this.router.navigateByUrl('/listahq');
       },
       (error) => {
         log.debug(error);
