@@ -14,6 +14,7 @@ import { Editora } from '@app/@shared/models/editora';
 import { Constants } from '@app/config/constants';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
+import { Router } from '@angular/router';
 
 const log = new Logger('Lista HQ Avancado');
 
@@ -53,6 +54,7 @@ export class ListaHQAvancadoComponent implements OnInit {
   isLoadingCreate = false;
   spinner: any;
   capa: string;
+  usuarioLogado: any;
 
   constructor(
     public toastService: ToastService,
@@ -61,9 +63,17 @@ export class ListaHQAvancadoComponent implements OnInit {
     private apiHttpService: ApiHttpService,
     private apiEndpointsService: ApiEndpointsService,
     private confirmationDialogService: ConfirmationDialogService,
-    private constants: Constants
+    private constants: Constants,
+    private router: Router
   ) 
   {
+    this.usuarioLogado = localStorage.getItem('logado');
+           
+    if (this.usuarioLogado === 'false')
+    {
+      this.router.navigateByUrl('/login');
+    }
+
     this.createForm();
   }
 

@@ -28,6 +28,7 @@ export class EditoraComponent implements OnInit {
   editora: Editora;
   isAddNew: boolean = false;
   existeEditoraNaHQ: any;
+  usuarioLogado: any;
 
   constructor(
     public toastService: ToastService,
@@ -38,6 +39,13 @@ export class EditoraComponent implements OnInit {
     private confirmationDialogService: ConfirmationDialogService,
     private router: Router
   ) {
+    this.usuarioLogado = localStorage.getItem('logado');
+           
+    if (this.usuarioLogado === 'false')
+    {
+      this.router.navigateByUrl('/login');
+    }
+    
     this.createForm();
   }
 

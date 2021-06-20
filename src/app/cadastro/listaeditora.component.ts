@@ -5,6 +5,7 @@ import { ApiHttpService } from '@app/services/api-http.service';
 import { ApiEndpointsService } from '@app/services/api-endpoints.service';
 import { DataTablesResponse } from '@shared/classes/data-tables-response';
 import { Logger } from '@core';
+import { Router } from '@angular/router';
 
 const log = new Logger('ListaEditora');
 
@@ -16,8 +17,20 @@ const log = new Logger('ListaEditora');
 export class ListaEditoraComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   editoras: Editora[];
+  usuarioLogado: any;
 
-  constructor(private apiHttpService: ApiHttpService, private apiEndpointsService: ApiEndpointsService) {}
+  constructor(
+    private apiHttpService: ApiHttpService, private apiEndpointsService: ApiEndpointsService, private router: Router)
+    
+    {
+
+      this.usuarioLogado = localStorage.getItem('logado');
+           
+      if (this.usuarioLogado === 'false')
+      {
+        this.router.navigateByUrl('/login');
+      }
+    }
 
   ngOnInit() {
     this.dtOptions = {

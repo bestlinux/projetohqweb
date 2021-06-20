@@ -6,6 +6,7 @@ import { Logger } from '@core';
 import { HQ } from '@shared/models/hq';
 import { DataTablesResponse } from '@shared/classes/data-tables-response';
 import { Frase } from '@shared/models/frase';
+import { Router } from '@angular/router';
 
 const log = new Logger('Home');
 
@@ -51,11 +52,25 @@ export class HomeComponent implements OnInit {
   tituloFraseHQ: string;
   arquivoFrase: string;
   totalHqs: number;
+  
+  usuarioLogado: any;
+
 
   constructor(
-    private apiHttpService: ApiHttpService, private apiEndpointsService: ApiEndpointsService) {}
+    private router: Router,
+    private apiHttpService: ApiHttpService, 
+    private apiEndpointsService: ApiEndpointsService) 
+    {
+      this.usuarioLogado = localStorage.getItem('logado');
+           
+      if (this.usuarioLogado === 'false')
+      {
+        this.router.navigateByUrl('/login');
+      }
+    }
 
-  ngOnInit() {
+  ngOnInit() {   
+    
     this.apiHttpService
     .get(this.apiEndpointsService.getHQsEndpoint(), this.dataTablesParameters)
     .subscribe((resp: DataTablesResponse) => {

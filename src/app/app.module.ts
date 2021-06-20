@@ -20,6 +20,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { MatSliderModule } from '@angular/material/slider';
 import { HomeModule } from './home/home.module';
 
+import { LoginComponent } from './login/login.component';
+
 @NgModule({
   //IMPORTANTE: A ORDEM DA IMPORTACAO DO MODULOS AFETA A ROTA DAS PAGINAS
   imports: [
@@ -37,7 +39,7 @@ import { HomeModule } from './home/home.module';
     AppRoutingModule, // must be imported as the last module as it contains the fallback route
     MatSliderModule,
   ],
-  declarations: [AppComponent],
+  declarations: [AppComponent,LoginComponent],
   providers: [],
   bootstrap: [AppComponent],
 })

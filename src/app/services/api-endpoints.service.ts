@@ -73,8 +73,6 @@ export class ApiEndpointsService {
   public getHQByEditoraQueryEndpoint = (nome: string): string =>
     this.createUrlWithPathVariables('Hq/BuscaPorEditora', [nome]);
 
-  //public getHQInWebEndpoint = (titulo: string, anoLancamento: string, numeroEdicao: string, editora: string, categoria:number, genero:number, status: number, formato:number): string => this.createUrlWithPathVariables('Hq/SearchWeb', [titulo,anoLancamento,numeroEdicao,editora,categoria,genero,status,formato]);
-
   public getHQInWebEndpoint(
     titulo: string,
     anoLancamento: string,
@@ -86,14 +84,6 @@ export class ApiEndpointsService {
     formato: number
   ): string {
     const queryString: QueryStringParameters = new QueryStringParameters();
-    /*queryString.push('titulo', titulo);
-    queryString.push('anoLancamento', anoLancamento);
-    queryString.push('numeroEdicao', numeroEdicao);
-    queryString.push('editora', editora);
-    queryString.push('categoria', categoria);
-    queryString.push('genero', genero);
-    queryString.push('status', status);
-    queryString.push('formato', formato);*/
     return `${this.createUrlWithPathVariables('Hq/BuscaWeb', [
       titulo,
       editora,
@@ -169,6 +159,13 @@ export class ApiEndpointsService {
   public postFrasesPagedEndpoint = (): string => this.createUrl('Frases/Paged');
 
   public deleteFraseByIdEndpoint = (id: string): string => this.createUrlWithPathVariables('Frases', [id]);
+
+  //************************* */
+
+  //ENDPOINT LOGIN
+
+  public getLoginQueryEndpoint = (usuario: string, senha: string): string =>
+  this.createUrlWithPathVariables('Login/ValidaUsuario', [usuario, senha]);
 
   //************************* */
 

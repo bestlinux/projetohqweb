@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd, ActivatedRoute,NavigationStart  } from '@angular/router';
 
 @Component({
   selector: 'app-shell',
@@ -6,7 +7,30 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./shell.component.scss'],
 })
 export class ShellComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
+  
+  mostrarCabecalho: boolean;
+  existeUsuario: any;
+  
+  constructor(private router: Router) 
+  {
+    router.events.forEach((event) => {
+      if (event instanceof NavigationStart) {
+        if (event['url'] == '/login') {
+          this.existeUsuario = false;
+          localStorage.setItem('logado', this.existeUsuario);
+          this.mostrarCabecalho = false;
+        } else {
+          // console.log("NU")
+          this.existeUsuario = true;
+          localStorage.setItem('logado', this.existeUsuario);
+          this.mostrarCabecalho = true;
+        }
+      }
+    });
+  }
+  
+  ngOnInit() 
+  {
+   
+  }
 }

@@ -8,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
   menuHidden = true;
 
-  constructor() {}
 
-  ngOnInit() {}
+  constructor() 
+  {
+    
+  }
+
+  ngOnInit() 
+  {
+  
+  }
 
   toggleMenu() {
     this.menuHidden = !this.menuHidden;

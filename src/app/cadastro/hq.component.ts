@@ -56,7 +56,8 @@ export class HQComponent implements OnInit {
   capa: string;
   voltarHqAvancado: boolean = false;
   idBuscaAvancada: any;
-
+  usuarioLogado: any;
+  
   constructor(
     public toastService: ToastService,
     private route: ActivatedRoute,
@@ -68,6 +69,13 @@ export class HQComponent implements OnInit {
     private router: Router,
   ) 
   {    
+    this.usuarioLogado = localStorage.getItem('logado');
+           
+    if (this.usuarioLogado === 'false')
+    {
+      this.router.navigateByUrl('/login');
+    }
+
     this.createForm();
   }
 
