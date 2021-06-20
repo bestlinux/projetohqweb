@@ -25,7 +25,7 @@ export class ListaHQComponent implements OnInit {
   constructor(private apiHttpService: ApiHttpService, private apiEndpointsService: ApiEndpointsService, private router: Router) 
   {
       this.usuarioLogado = localStorage.getItem('logado');
-           
+      console.log('curent status is ' + this.usuarioLogado);
       if (this.usuarioLogado === 'false')
       {
         this.router.navigateByUrl('/login');

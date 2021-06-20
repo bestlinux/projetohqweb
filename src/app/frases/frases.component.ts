@@ -12,6 +12,7 @@ import { HttpEventType } from '@angular/common/http';
 import { HttpRequest } from '@angular/common/http';
 import { Frase } from '@shared/models/frase';
 import { DataTablesResponse } from '@shared/classes/data-tables-response';
+import { Router } from '@angular/router';
 
 const log = new Logger('Frases');
 
@@ -33,6 +34,7 @@ export class FrasesComponent implements OnInit {
   frases: Frase[];
   imagem: any;
   isLoadFullImage: boolean = false;
+  usuarioLogado: any;
 
   constructor(
     public toastService: ToastService,
@@ -40,8 +42,16 @@ export class FrasesComponent implements OnInit {
     private formBuilder: FormBuilder,
     private apiHttpService: ApiHttpService,
     private apiEndpointsService: ApiEndpointsService,
-    private confirmationDialogService: ConfirmationDialogService
+    private confirmationDialogService: ConfirmationDialogService,
+    private router: Router
   ) {
+    this.usuarioLogado = localStorage.getItem('logado');
+           
+    if (this.usuarioLogado === 'false')
+    {
+      this.router.navigateByUrl('/login');
+    }
+
     this.createForm();
   }
    // Handle Delete button click

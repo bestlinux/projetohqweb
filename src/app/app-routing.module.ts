@@ -17,12 +17,12 @@ const routes: Routes = [
     { path: 'listahq', loadChildren: () => import('./cadastro/listahq.module').then((m) => m.ListaHQModule) },
     { path: 'editora', loadChildren: () => import('./cadastro/editora.module').then((m) => m.EditoraModule) },
     { path: 'frases', loadChildren: () => import('./frases/frases.module').then((m) => m.FrasesModule) },
-    { path: '', loadChildren: () => import('./home/home.module').then((m) => m.HomeModule) },
-    { path: 'login', component: LoginComponent },
-    { path: 'sair', component: ExitComponent },
+    { path: '', loadChildren: () => import('./login/login.module').then((m) => m.LoginModule) },
   ]),
   // Fallback when no prior route is matched
-  { path: '**', redirectTo: '/home', pathMatch: 'full' },
+  { path: '**', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'sair', redirectTo: '/login', pathMatch: 'full' },
 ];
 
 @NgModule({

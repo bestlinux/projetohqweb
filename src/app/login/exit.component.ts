@@ -30,6 +30,7 @@ export class ExitComponent implements OnInit {
   ngOnInit(): void {
     this.existeUsuario = false;
     localStorage.setItem('logado', this.existeUsuario);
+    console.log('curent status is Exit ' + this.existeUsuario);
     this.router.navigateByUrl('/login');
    }
   

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TokenStorageService } from '@app/login/token-storage.service';
 import { ApiHttpService } from '@app/services/api-http.service';
 import { ApiEndpointsService } from '@app/services/api-endpoints.service';
@@ -15,27 +16,27 @@ const log = new Logger('Login');
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  form: any = {
-    username: null,
-    password: null
-  };
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
   existeUsuario: any;
+  form: FormGroup;
 
   constructor(
       private tokenStorage: TokenStorageService,
       private apiHttpService: ApiHttpService,
       private apiEndpointsService: ApiEndpointsService,
       private router: Router,
+      private formBuilder: FormBuilder,
       public toastService: ToastService) 
       { 
-
+        this.createForm();
       }
 
   ngOnInit(): void {
+    this.existeUsuario = false;
+    localStorage.setItem('logado', this.existeUsuario);
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getUser().roles;
@@ -43,7 +44,11 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const { username, password } = this.form;
+    const 
+    { 
+      username,
+      password 
+    } = this.form.value;
     this.login(username, password);
   }
 
@@ -89,5 +94,12 @@ export class LoginComponent implements OnInit {
           autohide: true,
           headertext: headerText,
         });
+  }
+   // reactive form
+   private createForm() {
+    this.form = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
   }
 }
