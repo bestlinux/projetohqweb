@@ -12,7 +12,6 @@ const routes: Routes = [
     },
     { path: 'listahqavancado', loadChildren: () => import('./cadastro/listahqavancado.module').then((m) => m.ListaHQAvancadoModule) },
     { path: 'home', loadChildren: () => import('./home/home.module').then((m) => m.HomeModule) },
-    { path: 'detail', loadChildren: () => import('./detail/detail.module').then((m) => m.DetailModule) },
     { path: 'hq', loadChildren: () => import('./cadastro/hq.module').then((m) => m.HQModule) },
     { path: 'listahq', loadChildren: () => import('./cadastro/listahq.module').then((m) => m.ListaHQModule) },
     { path: 'editora', loadChildren: () => import('./cadastro/editora.module').then((m) => m.EditoraModule) },
