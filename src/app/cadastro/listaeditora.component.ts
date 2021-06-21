@@ -47,7 +47,7 @@ export class ListaEditoraComponent implements OnInit {
           .post(this.apiEndpointsService.postEditoraPagedEndpoint(), dataTablesParameters)
           .subscribe((resp: DataTablesResponse) => {
             this.editoras = resp.data;
-            console.log(this.editoras);
+            //console.log(this.editoras);
             callback({
               recordsTotal: resp.recordsTotal,
               recordsFiltered: resp.recordsFiltered,

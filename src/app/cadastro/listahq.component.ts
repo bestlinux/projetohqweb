@@ -25,7 +25,7 @@ export class ListaHQComponent implements OnInit {
   constructor(private apiHttpService: ApiHttpService, private apiEndpointsService: ApiEndpointsService, private router: Router) 
   {
       this.usuarioLogado = localStorage.getItem('logado');
-      console.log('curent status is ' + this.usuarioLogado);
+      //console.log('curent status is ' + this.usuarioLogado);
       if (this.usuarioLogado === 'false')
       {
         this.router.navigateByUrl('/login');
@@ -35,7 +35,7 @@ export class ListaHQComponent implements OnInit {
   exibeImagemFull(capa: any) {
     this.isLoadFullImage = true;
     this.capaFull = capa;
-    console.log(capa);
+    //console.log(capa);
   }
 
   ngOnInit() {

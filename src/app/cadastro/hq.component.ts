@@ -108,23 +108,23 @@ export class HQComponent implements OnInit {
 
   consoleLogEditora(nomeEditora: any) {
     this.selectedEditora = nomeEditora;
-    console.log('curent editora is ' + this.selectedEditora);
+    //console.log('curent editora is ' + this.selectedEditora);
   }
 
   consoleLogCategoria(newValue: any) {
-    console.log('curent categoria is ' + this.selectedCategoria);
+    //console.log('curent categoria is ' + this.selectedCategoria);
   }
 
   consoleLogGenero(valor: any) {
-    console.log('curent genero is ' + this.selectedGenero);
+    //console.log('curent genero is ' + this.selectedGenero);
   }
 
   consoleLogStatus(valor1: any) {
-    console.log('curent status is ' + this.selectedStatus);
+    //console.log('curent status is ' + this.selectedStatus);
   }
 
   consoleLogFormato(valor1: any) {
-    console.log('curent formato is ' + this.selectedFormato);
+    //console.log('curent formato is ' + this.selectedFormato);
   }
 
   ngOnInit() {
@@ -300,7 +300,7 @@ export class HQComponent implements OnInit {
         (resp: DataTablesResponse) => {
           this.hqs = resp.data;
           this.isLoading = false;
-          console.log(this.hqs);
+          //console.log(this.hqs);
           this.dataSource = new MatTableDataSource(this.hqs);
         },
         (error) => (this.isLoading = false)

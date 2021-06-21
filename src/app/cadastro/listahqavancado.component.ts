@@ -235,7 +235,7 @@ export class ListaHQAvancadoComponent implements OnInit {
         (resp: DataTablesResponse) => {
           this.hqs = resp.data;
           this.isLoading = false;
-          console.log(this.hqs);
+          //console.log(this.hqs);
           this.dataSource = new MatTableDataSource(this.hqs);
         },
         (error) => (this.isLoading = false)

@@ -92,7 +92,7 @@ export class FrasesComponent implements OnInit {
   exibeImagemFull(capa: any) {
     this.isLoadFullImage = true;
     this.imagem = capa;
-    console.log(capa);
+    //console.log(capa);
   }
 
   ngOnInit() {
@@ -122,7 +122,7 @@ export class FrasesComponent implements OnInit {
           .post(this.apiEndpointsService.postFrasesPagedEndpoint(), dataTablesParameters)
           .subscribe((resp: DataTablesResponse) => {
             this.frases = resp.data;
-            console.log(this.frases);
+            //console.log(this.frases);
             callback({
               recordsTotal: resp.recordsTotal,
               recordsFiltered: resp.recordsFiltered,
