@@ -162,6 +162,18 @@ export class ApiEndpointsService {
 
   //************************* */
 
+    //ENDPOINT COLECAO
+
+    public getColecaoEndpoint = (): string => this.createUrl('Colecao');
+
+    public postImageColecaoUploadEndpoint = (): string => this.createUrl('Colecao/UploadImage');
+  
+    public postColecaoPagedEndpoint = (): string => this.createUrl('Colecao/Paged');
+  
+    public deleteColecaoByIdEndpoint = (id: string): string => this.createUrlWithPathVariables('Colecao', [id]);
+  
+    //************************* */
+
   //ENDPOINT LOGIN
 
   public getLoginQueryEndpoint = (usuario: string, senha: string): string =>

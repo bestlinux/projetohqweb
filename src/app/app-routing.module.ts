@@ -17,6 +17,7 @@ const routes: Routes = [
     { path: 'listahq', loadChildren: () => import('./cadastro/listahq.module').then((m) => m.ListaHQModule) },
     { path: 'editora', loadChildren: () => import('./cadastro/editora.module').then((m) => m.EditoraModule) },
     { path: 'frases', loadChildren: () => import('./frases/frases.module').then((m) => m.FrasesModule) },
+    { path: 'colecao', loadChildren: () => import('./colecao/colecao.module').then((m) => m.ColecaoModule) },
     { path: '', loadChildren: () => import('./login/login.module').then((m) => m.LoginModule) },
   ]),
   // Fallback when no prior route is matched
