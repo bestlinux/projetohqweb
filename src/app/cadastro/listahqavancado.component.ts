@@ -70,7 +70,9 @@ export class ListaHQAvancadoComponent implements OnInit {
   spinner: any;
   capa: string;
   usuarioLogado: any;
-
+  isLoadFullImage: boolean = false;
+  capaFull: any;
+  
   constructor(
     public toastService: ToastService,
     private route: ActivatedRoute,
@@ -101,6 +103,11 @@ export class ListaHQAvancadoComponent implements OnInit {
     }
   }
 
+  exibeImagemFull(capa: any) {
+    this.isLoadFullImage = true;
+    this.capaFull = capa;
+    //console.log(capa);
+  }
 
   ngOnInit() {
     this.dataSource.sort = this.sort;

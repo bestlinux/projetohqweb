@@ -14,7 +14,7 @@ export const environment = {
   production: false,
   version: env.npm_package_version + '-dev',
   serverUrl: '/api',
-  defaultLanguage: 'en-US',
+  defaultLanguage: 'pt-BR',
   supportedLanguages: ['en-US', 'pt-BR'],
   Api_Endpoint: 'https://localhost:44378/api/v1',
   Api_Mock_Endpoint: 'https://angular-datatables-demo-server.herokuapp.com',
