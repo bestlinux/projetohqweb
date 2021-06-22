@@ -143,13 +143,23 @@
             <div class="card-header">
               <div class="float-left"><h3 class="text-info">HQs encontradas</h3></div>
             </div>
+            <mat-form-field>
+              <mat-label>Filter</mat-label>
+              <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+            </mat-form-field>
             <div class="card-body">
-              <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+              <table mat-table [dataSource]="dataSource"  matSort class="mat-elevation-z8">
                   
                 <!-- Position Column -->
                 <ng-container matColumnDef="titulo">
-                  <th mat-header-cell *matHeaderCellDef>Titulo</th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Titulo</th>
                   <td mat-cell *matCellDef="let hq"><a [routerLink]="['/hq', hq.id, hq.titulo]">{{ hq.titulo }}</a></td>
+                </ng-container>
+                
+                    <!-- Position Column -->
+                <ng-container matColumnDef="created">
+                   <th mat-header-cell *matHeaderCellDef mat-sort-header>Data de Criação</th>
+                   <td mat-cell *matCellDef="let hq">{{ hq.created | date: 'dd/MM/yyyy' }}</td>
                 </ng-container>
 
                 <!-- Name Column -->
@@ -170,6 +180,7 @@
                   <td class="mat-cell" colspan="4">Não foi encontrada nenhuma HQ com o criterio informado</td>
                 </tr>
               </table>
+              <mat-paginator [pageSizeOptions]="[100, 200, 300]" showFirstLastButtons></mat-paginator>
               <div
                 *ngIf="isLoading"
                 style="display: flex; justify-content: center; align-items: center; background: white"

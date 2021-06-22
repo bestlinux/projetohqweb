@@ -18,4 +18,5 @@ export interface HQ {
   dataPublicacao: string;
   personagens: string;
   desenhosRoteirosArteFinalCores: string;
+  created: Date;
 }

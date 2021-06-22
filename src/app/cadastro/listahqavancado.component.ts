@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DataTablesResponse } from '@shared/classes/data-tables-response';
@@ -15,6 +15,8 @@ import { Constants } from '@app/config/constants';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Router } from '@angular/router';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 
 const log = new Logger('Lista HQ Avancado');
 
@@ -24,8 +26,13 @@ const log = new Logger('Lista HQ Avancado');
   styleUrls: ['./listahqavancado.component.scss'],
 })
 export class ListaHQAvancadoComponent implements OnInit {
-  displayedColumns: string[] = ['titulo', 'linkDetalhes'];
+  displayedColumns: string[] = ['titulo', 'created', 'linkDetalhes'];
   dataSource = new MatTableDataSource<HQ>();
+
+
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   selection = new SelectionModel<HQ>(true, []);
   hqs: HQ[];
   hqsSelected: HQ[];
@@ -76,10 +83,20 @@ export class ListaHQAvancadoComponent implements OnInit {
 
     this.createForm();
   }
+  
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
 
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 
 
   ngOnInit() {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
     this.loadEditora();
     this.loadGenero();
     this.loadCategoria();
@@ -142,6 +159,8 @@ export class ListaHQAvancadoComponent implements OnInit {
   
   // Handle Create button click
   onSearch() {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
     this.readyToCreate = true;
     this.isLoading = true;
     this.advancedSearch(
@@ -201,18 +220,6 @@ export class ListaHQAvancadoComponent implements OnInit {
     if (personagens == '' || personagens == null) personagens = "null";
 
     if (roteiro == '' || roteiro == null) roteiro = "null";
-
-    log.debug('categoria: ', categoria);
-    log.debug('genero: ', genero);
-    log.debug('status: ', status);
-    log.debug('formato: ', formato);
-    log.debug('numeroEdicao: ', numeroEdicao);
-    log.debug('lido: ', lido);
-    log.debug('editora: ', editora);
-    log.debug('anoLancamento: ', anoLancamento);
-    log.debug('titulo: ', titulo);
-    log.debug('personagens: ', personagens);
-    log.debug('roteiro: ', roteiro);
     
     this.apiHttpService
       .get(
@@ -237,6 +244,8 @@ export class ListaHQAvancadoComponent implements OnInit {
           this.isLoading = false;
           //console.log(this.hqs);
           this.dataSource = new MatTableDataSource(this.hqs);
+          this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
         },
         (error) => (this.isLoading = false)
       );

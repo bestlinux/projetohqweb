@@ -37,7 +37,13 @@
             >
             <span translate><i class="fas fa-sign-in-alt"></i> Login</span>
             </button>
-          </div>          
+          </div>      
+          <div
+          *ngIf="isLoading"
+          style="display: flex; justify-content: center; align-items: center; background: white"
+          >
+            <mat-progress-spinner color="primary" mode="indeterminate"> </mat-progress-spinner>
+          </div>    
         </form>
     
         <div class="alert alert-success" *ngIf="isLoggedIn">

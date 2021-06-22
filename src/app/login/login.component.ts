@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
   roles: string[] = [];
   existeUsuario: any;
   form: FormGroup;
+  isLoading = false;
 
   constructor(
       private tokenStorage: TokenStorageService,
@@ -49,6 +50,7 @@ export class LoginComponent implements OnInit {
       username,
       password 
     } = this.form.value;
+    this.isLoading = true;
     this.login(username, password);
   }
 
@@ -62,6 +64,7 @@ export class LoginComponent implements OnInit {
 
         if (this.existeUsuario == true) 
         {
+            this.isLoading = false;
             localStorage.setItem('logado', this.existeUsuario);
 
             this.isLoginFailed = false;
