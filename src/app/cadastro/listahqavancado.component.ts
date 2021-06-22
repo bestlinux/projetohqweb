@@ -17,6 +17,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { Router } from '@angular/router';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 const log = new Logger('Lista HQ Avancado');
 
@@ -24,11 +25,18 @@ const log = new Logger('Lista HQ Avancado');
   selector: 'app-listahqavancado',
   templateUrl: './listahqavancado.component.html',
   styleUrls: ['./listahqavancado.component.scss'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class ListaHQAvancadoComponent implements OnInit {
   displayedColumns: string[] = ['titulo', 'created', 'linkDetalhes'];
   dataSource = new MatTableDataSource<HQ>();
-
+  expandedElement: HQ | null;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
