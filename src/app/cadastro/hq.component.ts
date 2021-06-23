@@ -362,8 +362,8 @@ export class HQComponent implements OnInit {
       if (resp.succeeded) {
         this.isLoadingCreate = false;
         this.showSuccess('Sucesso!', 'HQ(s) cadastrada(s)');
-        this.entryForm.reset();
-        this.selection.clear();
+        //this.entryForm.reset();
+        //this.selection.clear();
       } else {
         this.showError('Erro!', resp.message);
         this.isLoadingCreate = false;
