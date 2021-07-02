@@ -50,6 +50,7 @@ export class ListaHQAvancadoComponent implements OnInit {
   entryForm: FormGroup;
   error: string | undefined;
   hq: HQ;
+  leitura: HQ;
   editora: Editora;
   isAddNew: boolean = false;
   readyToCreate: boolean = false;
@@ -67,6 +68,7 @@ export class ListaHQAvancadoComponent implements OnInit {
   lidos: any;
   isLoading = true;
   isLoadingCreate = false;
+  isLoadingLeitura = false;
   spinner: any;
   capa: string;
   usuarioLogado: any;
@@ -92,6 +94,29 @@ export class ListaHQAvancadoComponent implements OnInit {
     }
 
     this.createForm();
+  }
+
+  leituraCreate(leitura: HQ) {
+    this.isLoadingLeitura = true;
+    this.leitura = leitura;
+    this.createLeitura(this.leitura);
+  }
+
+  // CRUD > Create, map to REST/HTTP POST
+  createLeitura(data: any): void {
+    this.apiHttpService.post(this.apiEndpointsService.postLeituraEndpoint(), data).subscribe((resp: DataResponseHQ) => {
+      this.hq = resp.data; //guid return in data
+      if (resp.succeeded) {
+        this.isLoadingLeitura = false;
+        this.showSuccess('Sucesso!', 'HQ cadastrada na lista de leitura');
+        //this.entryForm.reset();
+        //this.selection.clear();
+      } else {
+        this.showError('Erro!', resp.message);
+        this.isLoadingLeitura = false;
+      }
+      //this.entryForm.reset();
+    });
   }
   
   applyFilter(event: Event) {
@@ -298,7 +323,7 @@ export class ListaHQAvancadoComponent implements OnInit {
     this.toastService.show(bodyText, {
       classname: 'bg-danger text-light',
       delay: 4000,
-      autohide: true,
+      autohide: false,
       headertext: headerText,
     });
   }

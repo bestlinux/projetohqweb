@@ -169,13 +169,13 @@
                 <!-- Position Column -->
                 <ng-container matColumnDef="titulo">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header>Titulo</th>
-                  <td mat-cell *matCellDef="let hq"><a [routerLink]="['/hq', hq.id, hq.titulo]" target="_blank">{{ hq.titulo }}</a></td>
+                  <td mat-cell *matCellDef="let hq"><a [routerLink]="['/hq', hq.id, 'BuscaAvancada']">{{ hq.titulo }}</a></td>
                 </ng-container>
                 
                     <!-- Position Column -->
                 <ng-container matColumnDef="created">
                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Data de Criação</th>
-                   <td mat-cell *matCellDef="let hq">{{ hq.created | date: 'dd/MM/yyyy hh:mm' }}</td>
+                   <td mat-cell *matCellDef="let hq">{{ hq.created | date: 'dd/MM/yyyy HH:mm' }}</td>
                 </ng-container>
 
                 <!-- Name Column -->
@@ -215,6 +215,14 @@
                         >
                           Capa
                         </button>
+                        <button
+                        (click)="leituraCreate(hq)"
+                        type="button"
+                        class="btn btn-primary"
+                        >
+                        Iniciar Leitura
+                        </button>
+                        <div class="spinner-border" role="status" id="spinner" *ngIf="isLoadingLeitura"></div>
                       </div>
                     </div>
                   </td>

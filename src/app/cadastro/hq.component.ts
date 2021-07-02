@@ -23,7 +23,7 @@ const log = new Logger('hq');
   styleUrls: ['./hq.component.scss'],
 })
 export class HQComponent implements OnInit {
-  displayedColumns: string[] = ['select', 'titulo', 'linkDetalhes'];
+  displayedColumns: string[] = ['select', 'titulo', 'linkDetalhes', 'desejo'];
   dataSource = new MatTableDataSource<HQ>();
   selection = new SelectionModel<HQ>(true, []);
   hqs: HQ[];
@@ -35,6 +35,7 @@ export class HQComponent implements OnInit {
   entryForm: FormGroup;
   error: string | undefined;
   hq: HQ;
+  desejo: HQ;
   editora: Editora;
   isAddNew: boolean = false;
   readyToCreate: boolean = false;
@@ -52,10 +53,12 @@ export class HQComponent implements OnInit {
   lidos: any;
   isLoading = true;
   isLoadingCreate = false;
+  isLoadingDesejo = false;
   spinner: any;
   capa: string;
   voltarHqAvancado: boolean = false;
-  idBuscaAvancada: any;
+  voltarHqLeitura: boolean = false;
+  rotaBotaoVoltar: any;
   usuarioLogado: any;
   
   constructor(
@@ -106,6 +109,12 @@ export class HQComponent implements OnInit {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.linkDetalhes + 1}`;
   }
 
+  desejoCreate(desejo: HQ) {
+    this.isLoadingDesejo = true;
+    this.desejo = desejo;
+    this.createDesejo(this.desejo);
+  }
+
   consoleLogEditora(nomeEditora: any) {
     this.selectedEditora = nomeEditora;
     //console.log('curent editora is ' + this.selectedEditora);
@@ -130,13 +139,16 @@ export class HQComponent implements OnInit {
   ngOnInit() {
     this.sub = this.route.params.subscribe((params) => {
       this.id = params['id'];
-      this.idBuscaAvancada = params['titulo'];
+      this.rotaBotaoVoltar = params['rota'];
+
+      console.log(this.rotaBotaoVoltar);
 
       //VOLTA PARA A TELA DE LISTA DE HQS
       if (this.id !== undefined) {
         this.read(this.route.snapshot.paramMap.get('id'));
         this.formMode = 'Edit';
         this.voltarHqAvancado = false;
+        this.voltarHqLeitura = false;
       }     
       else {
         this.isAddNew = true;
@@ -144,13 +156,21 @@ export class HQComponent implements OnInit {
       }
 
       //VOLTA PARA A TELA DE BUSCA AVANCADA
-      if (this.idBuscaAvancada !== undefined)
+      if (this.rotaBotaoVoltar !== undefined)
       {
-        this.read(this.route.snapshot.paramMap.get('id'));
-        this.formMode = 'Edit';
-        this.voltarHqAvancado = true;
+        if (this.rotaBotaoVoltar === 'Leitura')
+        {
+          this.read(this.route.snapshot.paramMap.get('id'));
+          this.formMode = 'Edit';
+          this.voltarHqLeitura = true;
+        }
+        if (this.rotaBotaoVoltar === 'BuscaAvancada')
+        {
+          this.read(this.route.snapshot.paramMap.get('id'));
+          this.formMode = 'Edit';
+          this.voltarHqAvancado = true;
+        }
       }
-
     });
 
     this.loadEditora();
@@ -372,6 +392,23 @@ export class HQComponent implements OnInit {
     });
   }
 
+  // CRUD > Create, map to REST/HTTP POST
+  createDesejo(data: any): void {
+    this.apiHttpService.post(this.apiEndpointsService.postDesejoEndpoint(), data).subscribe((resp: DataResponseHQ) => {
+      this.hq = resp.data; //guid return in data
+      if (resp.succeeded) {
+        this.isLoadingDesejo = false;
+        this.showSuccess('Sucesso!', 'HQ cadastrada na lista de desejo');
+        //this.entryForm.reset();
+        //this.selection.clear();
+      } else {
+        this.showError('Erro!', resp.message);
+        this.isLoadingDesejo = false;
+      }
+      //this.entryForm.reset();
+    });
+  }
+
   // CRUD > Update, map to REST/HTTP PUT
   put(id: string, data: any): void {
     this.apiHttpService.put(this.apiEndpointsService.putHQPagedEndpoint(id), data).subscribe((resp: any) => {
@@ -414,8 +451,8 @@ export class HQComponent implements OnInit {
   showError(headerText: string, bodyText: string) {
     this.toastService.show(bodyText, {
       classname: 'bg-danger text-light',
-      delay: 4000,
-      autohide: true,
+      delay: 10000,
+      autohide: false,
       headertext: headerText,
     });
   }

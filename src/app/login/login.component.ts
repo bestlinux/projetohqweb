@@ -76,6 +76,7 @@ export class LoginComponent implements OnInit {
         else 
         {
             this.showError('Erro!', 'Falha ao realizar o login');
+            this.isLoading = false;
             this.isLoginFailed = true;
         }
       },

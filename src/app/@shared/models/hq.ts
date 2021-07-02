@@ -17,6 +17,7 @@ export interface HQ {
   preco: string;
   dataPublicacao: string;
   personagens: string;
+  lastModified: Date;
   desenhosRoteirosArteFinalCores: string;
   created: Date;
 }

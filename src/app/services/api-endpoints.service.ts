@@ -181,6 +181,19 @@ export class ApiEndpointsService {
 
   //************************* */
 
+  //ENDPOINT LISTA DE DESEJO
+  public postDesejoEndpoint = (): string => this.createUrl('Desejo/Desejo');
+  public postDesejosPagedEndpoint = (): string => this.createUrl('Desejo/Paged');
+  public deleteDesejoByIdEndpoint = (id: string): string => this.createUrlWithPathVariables('Desejo', [id]);
+  //************************* */
+
+  //ENDPOINT LISTA DE LEITURA
+  public postLeituraEndpoint = (): string => this.createUrl('Leitura/Leitura');
+  public postLeiturasPagedEndpoint = (): string => this.createUrl('Leitura/Paged');
+  public deleteLeituraByIdEndpoint = (id: string): string => this.createUrlWithPathVariables('Leitura', [id]);
+  public putLeituraPagedEndpoint = (id: string): string => this.createUrlWithPathVariables('Leitura', [id]);
+  //*************************** */
+
   public deletePositionByIdEndpoint = (id: string): string => this.createUrlWithPathVariables('Positions', [id]);
 
   public postPersonsEndpoint = (): string => this.createUrl('', true);

@@ -280,6 +280,20 @@
                 <td mat-cell *matCellDef="let hq"><a href="{{hq.thumbCapa}}" target="_blank">Capa</a></td>
               </ng-container> -->
 
+              <ng-container matColumnDef="desejo">
+                <th mat-header-cell *matHeaderCellDef>Desejo</th>
+                <td mat-cell *matCellDef="let hq">
+                  <button
+                  (click)="desejoCreate(hq)"
+                  type="button"
+                  class="btn btn-primary"
+                >
+                  Desejo
+                </button>
+                <div class="spinner-border" role="status" id="spinner" *ngIf="isLoadingDesejo"></div>
+                </td>
+              </ng-container>
+
               <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: 'true'"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumns" (click)="selection.toggle(row)"></tr>
               <tr class="mat-row" *matNoDataRow>
@@ -333,8 +347,9 @@
         </div>
         <div class="float-right">
           <!-- HTML markup for Back button -->
-          <a class="btn text-dark" [routerLink]="['/listahq']" *ngIf="!this.voltarHqAvancado"><i class="fa fa-arrow-left"></i> Back</a>
+          <a class="btn text-dark" [routerLink]="['/listahq']" *ngIf="!this.voltarHqAvancado && !this.voltarHqLeitura"><i class="fa fa-arrow-left"></i> Back</a>
           <a class="btn text-dark" [routerLink]="['/listahqavancado']" *ngIf="this.voltarHqAvancado"><i class="fa fa-arrow-left"></i> Back</a>
+          <a class="btn text-dark" [routerLink]="['/listaleitura']" *ngIf="this.voltarHqLeitura"><i class="fa fa-arrow-left"></i> Back</a>
         </div>
       </div>
     </div>
