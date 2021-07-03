@@ -1,4 +1,4 @@
-# angularcrud
+# projetohq
 
 Welcome to the project documentation!
 
