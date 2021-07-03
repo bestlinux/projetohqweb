@@ -23,6 +23,30 @@
           </div>
         </div>
       </div>
+      <div class="modal" id="modalMarcarLeitura" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Data de termino da leitura</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <mat-form-field appearance="fill">
+                <mat-label>Escolha a data</mat-label>
+              <!-- #docregion toggle -->
+                <input matInput [matDatepicker]="picker" [formControl]="startDate" required>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              <!-- #enddocregion toggle -->
+              </mat-form-field>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+              <button type="button" class="btn btn-primary" (click)="marcarLeitura()" data-bs-dismiss="modal">Salvar</button>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="card-body">
         <div class="table-responsive-sm">
           <!-- Angular Datatables server side paging -->
@@ -34,6 +58,7 @@
                 <th>Data de termino</th>
                 <th>Thumbs</th>
                 <th>Capa</th>
+                <th></th>
                 <th></th>
                 <th>Ações</th>
               </tr>
@@ -48,7 +73,7 @@
                 <th *ngIf="hq.lido === 1">Sim</th>
                 <td>
                   <!-- Hyperlink position number with routerLink and position Id parameter -->
-                  {{ hq.lastModified | date: 'dd/MM/yyyy HH:mm' }}
+                  {{ hq.dataLeitura | date: 'dd/MM/yyyy' }}
                 </td>
                 <td><img class="img-responsive" src="http://127.0.0.1:8887/Capas/{{ hq.capa }}" alt="Angular" /></td>
                 <td>
@@ -63,13 +88,24 @@
                   </button>
                 </td>
                 <td>
+                  <button
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="onUpdateNaoLido(hq)"
+                  >
+                  Marcar como não lido
+                  </button>                    
+                </td>
+                <td>
                     <button
-                      (click)="onUpdateLido(hq)"
-                      type="button"
-                      class="btn btn-primary"
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modalMarcarLeitura"
+                    (click)="currentRegistery=hq"
                     >
-                      Marcar como lido
-                    </button>
+                    Marcar como lido
+                    </button>                    
                 </td>
                 <td>
                   <button

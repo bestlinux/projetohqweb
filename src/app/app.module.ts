@@ -23,6 +23,11 @@ import { LoginModule } from './login/login.module';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeBr from '@angular/common/locales/pt';
+
+registerLocaleData(localeBr, 'pt')
 @NgModule({
   //IMPORTANTE: A ORDEM DA IMPORTACAO DO MODULOS AFETA A ROTA DAS PAGINAS
   imports: [
@@ -45,7 +50,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatSliderModule,
   ],
   declarations: [AppComponent],
-  providers: [],
+  providers: [{provide: LOCALE_ID, useValue: 'pt' }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

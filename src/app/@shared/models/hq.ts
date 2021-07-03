@@ -20,4 +20,5 @@ export interface HQ {
   lastModified: Date;
   desenhosRoteirosArteFinalCores: string;
   created: Date;
+  dataLeitura: Date;
 }

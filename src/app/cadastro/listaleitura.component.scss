@@ -22,8 +22,18 @@
     width: 400px;
     height: 617px;
   }
+
+.cdk-overlay-pane {
+    position: absolute;
+    pointer-events: auto;
+    box-sizing: border-box;
+    z-index: 1000;
+    display: flex;
+    max-width: 100%;
+    max-height: 100%;
+}
   
   ::ng-deep table.dataTable td.dataTables_empty {
     display: none;
   }
-  
+  ::ng-deep .cdk-overlay-container { z-index:2000; }

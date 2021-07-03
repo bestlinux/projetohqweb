@@ -8,6 +8,10 @@ import { Logger } from '@core';
 import { Router } from '@angular/router';
 import { ConfirmationDialogService } from '@app/services/confirmation-dialog.service';
 import { ToastService } from '@app/services/toast.service';
+import { FormControl, Validators } from '@angular/forms';
+import {formatDate} from '@angular/common';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
 
 const log = new Logger('ListaLeitura');
 
@@ -26,6 +30,9 @@ export class ListaLeituraComponent implements OnInit {
   usuarioLogado: any;
   id: any;
   statusLido: any;
+  picker: any;
+  startDate = new FormControl(formatDate(new Date(), 'dd/MM/yyyy', 'pt'), Validators.required);
+  currentRegistery : HQ;
 
   constructor(
     private apiHttpService: ApiHttpService, 
@@ -42,24 +49,29 @@ export class ListaLeituraComponent implements OnInit {
       }
   }
 
-  exibeImagemFull(capa: any) {
-    this.isLoadFullImage = true;
-    this.capaFull = capa;
-    //console.log(capa);
+  marcarLeitura() {
+    this.currentRegistery.lido = 1;
+    this.currentRegistery.dataLeitura = this.startDate.value
+    this.put(this.currentRegistery.id, this.currentRegistery);
   }
 
-  // Handle Update button click
-  onUpdateLido(hq:any) {
-    this.hqAtualiza = hq;
-    this.hqAtualiza.lido = 1;
-    this.put(this.hqAtualiza.id, this.hqAtualiza);
+  exibeImagemFull(capa: any) {
+    this.isLoadFullImage = true;
+    this.capaFull = capa;  
   }
 
    // Handle Update button click
    onUpdateNaoLido(hq:any) {
     this.hqAtualiza = hq;
-    this.hqAtualiza.lido = 0;
-    this.put(this.hqAtualiza.id, this.hqAtualiza);
+
+    if (this.hqAtualiza.dataLeitura === null)
+        this.showError('Erro!', 'Esta HQ já esta marcada como não lida');
+    else
+    {
+      //this.hqAtualiza.dataLeitura = null;
+      this.hqAtualiza.lido = 0;
+      this.put(this.hqAtualiza.id, this.hqAtualiza);
+    }    
   }
 
   // CRUD > Update, map to REST/HTTP PUT
@@ -124,6 +136,16 @@ export class ListaLeituraComponent implements OnInit {
     });
   }
 
+   // ngbmodal service
+   showError(headerText: string, bodyText: string) {
+    this.toastService.show(bodyText, {
+      classname: 'bg-danger text-light',
+      delay: 10000,
+      autohide: false,
+      headertext: headerText,
+    });
+  }
+
   ngOnInit() {
     this.isLoadFullImage = false;
     this.testeModal = 'TEste';
@@ -161,7 +183,7 @@ export class ListaLeituraComponent implements OnInit {
         },
         {
           title: 'Data de termino',
-          data: 'lastModified',
+          data: 'dataLeitura',
         },
         {
           title: 'Thumbs',
@@ -170,6 +192,10 @@ export class ListaLeituraComponent implements OnInit {
         {
           title: 'Capa',
           data: 'capa',
+        },
+        {
+            title: '',
+            data: '',
         },
         {
             title: '',
