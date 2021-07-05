@@ -34,7 +34,7 @@ const log = new Logger('Lista HQ Avancado');
   ],
 })
 export class ListaHQAvancadoComponent implements OnInit {
-  displayedColumns: string[] = ['titulo', 'created', 'linkDetalhes'];
+  displayedColumns: string[] = ['titulo', 'created', 'linkDetalhes', 'acoes'];
   dataSource = new MatTableDataSource<HQ>();
   expandedElement: HQ | null;
 
@@ -289,6 +289,34 @@ export class ListaHQAvancadoComponent implements OnInit {
         },
         (error) => (this.isLoading = false)
       );
+  }
+
+  // Handle Delete button click
+  onDelete(id: any) {
+    this.confirmationDialogService
+      .confirm('Excluir HQ', 'Tem certeza que deseja excluir ?')
+      .then((confirmed) => {
+        if (confirmed) {
+          this.delete(id);
+        }
+      })
+      .catch(() => {
+        log.debug('onDelete: ', 'Cancel');
+      });
+  }
+
+   // CRUD > Delete, map to REST/HTTP DELETE
+   delete(id: any): void {
+    this.apiHttpService.delete(this.apiEndpointsService.deleteHQByIdEndpoint(id), id).subscribe(
+      (resp: any) => {
+        this.showSuccess('Sucesso!', 'HQ excluida');
+        this.router.navigateByUrl('/listahqavancado');
+        this.onSearch();
+      },
+      (error) => {
+        log.debug(error);
+      }
+    );
   }
 
   // reactive form

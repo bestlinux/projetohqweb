@@ -93,7 +93,7 @@ export class ListaLeituraComponent implements OnInit {
   // Handle Delete button click
   onDelete(id: any) {
     this.confirmationDialogService
-      .confirm('Excluir HQ da Lista de Leitura', 'Tem certeza que deseja excluir ?')
+      .confirm('Excluir HQ', 'Tem certeza que deseja excluir a HQ?')
       .then((confirmed) => {
         if (confirmed) {
           this.delete(id);
@@ -113,7 +113,7 @@ export class ListaLeituraComponent implements OnInit {
    delete(id: any): void {
     this.apiHttpService.delete(this.apiEndpointsService.deleteLeituraByIdEndpoint(id), id).subscribe(
       (resp: any) => {
-        this.showSuccess('Sucesso!', 'HQ excluida da Lista de Leitura');
+        this.showSuccess('Sucesso!', 'HQ excluida');
         (async () => {   
           await this.delay(2000);  
           // Do something after

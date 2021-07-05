@@ -227,6 +227,19 @@
                     </div>
                   </td>
                 </ng-container>
+
+                <ng-container matColumnDef="acoes">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Ações</th>
+                  <td mat-cell *matCellDef="let hq">
+                    <button
+                    (click)="onDelete(hq.id)"
+                    class="btn btn-danger w-20"
+                    type="submit"
+                    >
+                    <span translate><i class="fas fa-trash-alt"></i> Delete</span>
+                    </button>
+                  </td>
+               </ng-container>
   
                 <!-- Weight Column -->
                 <!--<ng-container matColumnDef="thumbCapa">
