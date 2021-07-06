@@ -84,7 +84,7 @@
                     data-bs-toggle="modal"
                     data-bs-target="#modalDetalhes"
                   >
-                    Capa
+                  <span translate><i class="far fa-image"></i> Capa</span>
                   </button>
                 </td>
                 <td>
@@ -92,8 +92,8 @@
                   type="button"
                   class="btn btn-primary"
                   (click)="onUpdateNaoLido(hq)"
-                  >
-                  Marcar como não lido
+                  >                  
+                  <span translate><i class="fas fa-book-open"></i> Marcar como não lido</span>
                   </button>                    
                 </td>
                 <td>
@@ -104,16 +104,16 @@
                     data-bs-target="#modalMarcarLeitura"
                     (click)="currentRegistery=hq"
                     >
-                    Marcar como lido
+                    <span translate><i class="fas fa-book"></i> Marcar como lido</span>
                     </button>                    
                 </td>
                 <td>
                   <button
                     (click)="onDelete(hq.id)"
                     type="button"
-                    class="btn btn-primary"
+                    class="btn btn-danger w-20"
                   >
-                    Excluir
+                  <span translate><i class="fas fa-trash-alt"></i> Excluir</span>
                   </button>
                 </td>
               </tr>

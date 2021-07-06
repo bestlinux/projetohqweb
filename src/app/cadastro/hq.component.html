@@ -288,7 +288,7 @@
                   type="button"
                   class="btn btn-primary"
                 >
-                  Desejo
+                <span translate><i class="fas fa-lightbulb"></i> Desejo</span>
                 </button>
                 <div class="spinner-border" role="status" id="spinner" *ngIf="isLoadingDesejo"></div>
                 </td>
@@ -322,7 +322,7 @@
             [disabled]="!readyToCreate"
             *ngIf="this.readyToCreate"
           >
-            <span translate><i class="fas fa-plus"></i> Create</span>
+            <span translate><i class="fas fa-plus"></i> Adicionar</span>
           </button>
           <div class="spinner-border" role="status" id="spinner" *ngIf="isLoadingCreate"></div>
           <button
@@ -332,7 +332,7 @@
             [disabled]="entryForm.invalid || isAddNew"
             *ngIf="!this.isAddNew"
           >
-            <span translate><i class="fas fa-edit"></i> Update</span>
+            <span translate><i class="fas fa-edit"></i> Atualizar</span>
           </button>
           <!-- HTML markup for Delete button -->
           <button
@@ -342,7 +342,7 @@
             [disabled]="entryForm.invalid || isAddNew"
             *ngIf="!this.isAddNew"
           >
-            <span translate><i class="fas fa-trash-alt"></i> Delete</span>
+            <span translate><i class="fas fa-trash-alt"></i> Excluir</span>
           </button>
         </div>
         <div class="float-right">

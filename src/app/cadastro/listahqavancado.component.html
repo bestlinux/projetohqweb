@@ -213,14 +213,14 @@
                           data-bs-toggle="modal"
                           data-bs-target="#modalDetalhes"
                         >
-                          Capa
+                        <span translate><i class="far fa-image"></i> Capa</span>
                         </button>
                         <button
                         (click)="leituraCreate(hq)"
                         type="button"
                         class="btn btn-primary"
                         >
-                        Iniciar Leitura
+                         <span translate><i class="fas fa-book-open"></i> Iniciar Leitura</span>
                         </button>
                         <div class="spinner-border" role="status" id="spinner" *ngIf="isLoadingLeitura"></div>
                       </div>
@@ -236,7 +236,7 @@
                     class="btn btn-danger w-20"
                     type="submit"
                     >
-                    <span translate><i class="fas fa-trash-alt"></i> Delete</span>
+                    <span translate><i class="fas fa-trash-alt"></i> Excluir</span>
                     </button>
                   </td>
                </ng-container>

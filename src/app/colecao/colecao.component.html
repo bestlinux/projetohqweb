@@ -60,7 +60,10 @@
                 (change)="imageInputChange($event)"
                 accept="image/png, image/jpeg"
               />
-              <button class="btn btn-primary" (click)="imageInput.click()">Escolha uma imagem (PNG, JPG)</button>
+              <button class="btn btn-primary" (click)="imageInput.click()">
+               
+              <span translate><i class="far fa-image"></i>  Escolha uma imagem (PNG, JPG)</span>
+              </button>
               <div class="card-body">
                 <div class="col-sm"></div>
               </div>
@@ -117,16 +120,16 @@
                           data-bs-toggle="modal"
                           data-bs-target="#modalDetalhes"
                         >
-                          Foto
+                        <span translate><i class="far fa-image"></i> Foto</span>
                         </button>
                       </td>
                       <td>
                         <button
                         (click)="onDelee(colecao.id)"
-                        class="btn btn-primary"
+                        class="btn btn-danger w-20"
                         type="button"
                         >
-                        Excluir
+                        <span translate><i class="fas fa-trash-alt"></i> Excluir</span>
                         </button>
                       </td>
                     </tr>
