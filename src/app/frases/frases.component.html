@@ -34,12 +34,7 @@
           <label for="positionTitle">Nome HQ</label>
 
           <label class="d-block">
-            <input
-              type="text"
-              class="form-control"
-              formControlName="nomeHQ"
-              autocomplete="current-nomeHQ"
-            />
+            <input type="text" class="form-control" formControlName="nomeHQ" autocomplete="current-nomeHQ" />
             <span hidden translate>NomeHQ</span>
             <small
               [hidden]="entryFormFrases.controls.nomeHQ.valid || entryFormFrases.controls.nomeHQ.untouched"
@@ -51,12 +46,7 @@
           </label>
           <label for="positionTitle">Autor</label>
           <label class="d-block">
-            <input
-              type="text"
-              class="form-control"
-              formControlName="autor"
-              autocomplete="current-autor"
-            />
+            <input type="text" class="form-control" formControlName="autor" autocomplete="current-autor" />
             <span hidden translate>Autor</span>
             <small
               [hidden]="entryFormFrases.controls.autor.valid || entryFormFrases.controls.autor.untouched"
@@ -77,8 +67,8 @@
               (change)="imageInputChange($event)"
               accept="image/png, image/jpeg"
             />
-            <button class="btn btn-primary" (click)="imageInput.click()">              
-            <span translate><i class="far fa-image"></i> Escolha uma imagem (PNG, JPG)</span>
+            <button class="btn btn-primary" (click)="imageInput.click()">
+              <span translate><i class="far fa-image"></i> Escolha uma imagem (PNG, JPG)</span>
             </button>
             <div class="card-body">
               <div class="col-sm"></div>
@@ -138,16 +128,12 @@
                         data-bs-toggle="modal"
                         data-bs-target="#modalDetalhes"
                       >
-                      <span translate><i class="far fa-image"></i> Capa</span>
+                        <span translate><i class="far fa-image"></i> Capa</span>
                       </button>
                     </td>
                     <td>
-                      <button
-                      (click)="onDelee(frase.id)"
-                      class="btn btn-danger w-20"
-                      type="button"
-                      >
-                      <span translate><i class="fas fa-trash-alt"></i> Excluir</span>
+                      <button (click)="onDelee(frase.id)" class="btn btn-danger w-20" type="button">
+                        <span translate><i class="fas fa-trash-alt"></i> Excluir</span>
                       </button>
                     </td>
                   </tr>

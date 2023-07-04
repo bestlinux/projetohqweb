@@ -118,6 +118,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ScrollingModule,
     FormsModule,
   ],
-  declarations: [ListaHQAvancadoComponent]
+  declarations: [ListaHQAvancadoComponent],
 })
 export class ListaHQAvancadoModule {}

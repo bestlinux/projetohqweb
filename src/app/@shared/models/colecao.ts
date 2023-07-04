@@ -1,6 +1,5 @@
 export interface Colecao {
-    id: string;
-    descricao: string;
-    arquivo: string;
-  }
-  
+  id: string;
+  descricao: string;
+  arquivo: string;
+}

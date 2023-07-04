@@ -25,18 +25,17 @@ export class ListaDesejoComponent implements OnInit {
   usuarioLogado: any;
 
   constructor(
-    private apiHttpService: ApiHttpService, 
+    private apiHttpService: ApiHttpService,
     private apiEndpointsService: ApiEndpointsService,
-    public toastService: ToastService, 
+    public toastService: ToastService,
     private confirmationDialogService: ConfirmationDialogService,
-    private router: Router) 
-  {
-      this.usuarioLogado = localStorage.getItem('logado');
-      //console.log('curent status is ' + this.usuarioLogado);
-      if (this.usuarioLogado === 'false')
-      {
-        this.router.navigateByUrl('/login');
-      }
+    private router: Router
+  ) {
+    this.usuarioLogado = localStorage.getItem('logado');
+    //console.log('curent status is ' + this.usuarioLogado);
+    if (this.usuarioLogado === 'false') {
+      this.router.navigateByUrl('/login');
+    }
   }
 
   exibeImagemFull(capa: any) {
@@ -61,19 +60,19 @@ export class ListaDesejoComponent implements OnInit {
   }
 
   delay(ms: number) {
-    return new Promise( resolve => setTimeout(resolve, ms) );
-   } 
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
 
-   // CRUD > Delete, map to REST/HTTP DELETE
-   delete(id: any): void {
+  // CRUD > Delete, map to REST/HTTP DELETE
+  delete(id: any): void {
     this.apiHttpService.delete(this.apiEndpointsService.deleteDesejoByIdEndpoint(id), id).subscribe(
       (resp: any) => {
         this.showSuccess('Sucesso!', 'HQ excluida da Lista de Desejo');
-        (async () => {   
-          await this.delay(2000);  
+        (async () => {
+          await this.delay(2000);
           // Do something after
           window.location.reload();
-         })();  
+        })();
       },
       (error) => {
         log.debug(error);
@@ -81,8 +80,8 @@ export class ListaDesejoComponent implements OnInit {
     );
   }
 
-   // ngbmodal service
-   showSuccess(headerText: string, bodyText: string) {
+  // ngbmodal service
+  showSuccess(headerText: string, bodyText: string) {
     this.toastService.show(bodyText, {
       classname: 'bg-success text-light',
       delay: 4000,

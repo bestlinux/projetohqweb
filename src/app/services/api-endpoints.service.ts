@@ -96,18 +96,18 @@ export class ApiEndpointsService {
     ])}?${queryString.toString()}`;
   }
 
-  public getHQAdvancedSearchEndpoint(   
-    categoria : number,
-    genero : number,
-    status : string,
-    formato : number,
-    lido : number,
-    numeroEdicao : number,
-    anoLancamento : string,
-    titulo : string,
-    roteiro : string,
-    personagens : string,
-    editora : string
+  public getHQAdvancedSearchEndpoint(
+    categoria: number,
+    genero: number,
+    status: string,
+    formato: number,
+    lido: number,
+    numeroEdicao: number,
+    anoLancamento: string,
+    titulo: string,
+    roteiro: string,
+    personagens: string,
+    editora: string
   ): string {
     const queryString: QueryStringParameters = new QueryStringParameters();
     /*queryString.push('anoLancamento', anoLancamento);
@@ -119,13 +119,13 @@ export class ApiEndpointsService {
     queryString.push('roteiro', roteiro);
     queryString.push('personagens', personagens);
     queryString.push('lido', lido);*/
-    return `${this.createUrlWithPathVariables('Hq/BuscaAvancada', [     
+    return `${this.createUrlWithPathVariables('Hq/BuscaAvancada', [
       categoria,
       genero,
       status,
       formato,
       lido,
-      numeroEdicao,     
+      numeroEdicao,
       anoLancamento,
       titulo,
       roteiro,
@@ -162,22 +162,22 @@ export class ApiEndpointsService {
 
   //************************* */
 
-    //ENDPOINT COLECAO
+  //ENDPOINT COLECAO
 
-    public getColecaoEndpoint = (): string => this.createUrl('Colecao');
+  public getColecaoEndpoint = (): string => this.createUrl('Colecao');
 
-    public postImageColecaoUploadEndpoint = (): string => this.createUrl('Colecao/UploadImage');
-  
-    public postColecaoPagedEndpoint = (): string => this.createUrl('Colecao/Paged');
-  
-    public deleteColecaoByIdEndpoint = (id: string): string => this.createUrlWithPathVariables('Colecao', [id]);
-  
-    //************************* */
+  public postImageColecaoUploadEndpoint = (): string => this.createUrl('Colecao/UploadImage');
+
+  public postColecaoPagedEndpoint = (): string => this.createUrl('Colecao/Paged');
+
+  public deleteColecaoByIdEndpoint = (id: string): string => this.createUrlWithPathVariables('Colecao', [id]);
+
+  //************************* */
 
   //ENDPOINT LOGIN
 
   public getLoginQueryEndpoint = (usuario: string, senha: string): string =>
-  this.createUrlWithPathVariables('Login/ValidaUsuario', [usuario, senha]);
+    this.createUrlWithPathVariables('Login/ValidaUsuario', [usuario, senha]);
 
   //************************* */
 

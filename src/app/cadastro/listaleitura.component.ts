@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { ConfirmationDialogService } from '@app/services/confirmation-dialog.service';
 import { ToastService } from '@app/services/toast.service';
 import { FormControl, Validators } from '@angular/forms';
-import {formatDate} from '@angular/common';
+import { formatDate } from '@angular/common';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 
@@ -23,7 +23,7 @@ const log = new Logger('ListaLeitura');
 export class ListaLeituraComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   hqs: HQ[];
-  hqAtualiza : HQ;
+  hqAtualiza: HQ;
   isLoadFullImage: boolean = false;
   capaFull: any;
   testeModal: 'TEste';
@@ -32,62 +32,59 @@ export class ListaLeituraComponent implements OnInit {
   statusLido: any;
   picker: any;
   startDate = new FormControl(formatDate(new Date(), 'dd/MM/yyyy', 'pt'), Validators.required);
-  currentRegistery : HQ;
+  currentRegistery: HQ;
 
   constructor(
-    private apiHttpService: ApiHttpService, 
+    private apiHttpService: ApiHttpService,
     private apiEndpointsService: ApiEndpointsService,
-    public toastService: ToastService, 
+    public toastService: ToastService,
     private confirmationDialogService: ConfirmationDialogService,
-    private router: Router) 
-  {
-      this.usuarioLogado = localStorage.getItem('logado');
-      //console.log('curent status is ' + this.usuarioLogado);
-      if (this.usuarioLogado === 'false')
-      {
-        this.router.navigateByUrl('/login');
-      }
+    private router: Router
+  ) {
+    this.usuarioLogado = localStorage.getItem('logado');
+    //console.log('curent status is ' + this.usuarioLogado);
+    if (this.usuarioLogado === 'false') {
+      this.router.navigateByUrl('/login');
+    }
   }
 
   marcarLeitura() {
     this.currentRegistery.lido = 1;
-    this.currentRegistery.dataLeitura = this.startDate.value
+    this.currentRegistery.dataLeitura = this.startDate.value;
     this.put(this.currentRegistery.id, this.currentRegistery);
   }
 
   exibeImagemFull(capa: any) {
     this.isLoadFullImage = true;
-    this.capaFull = capa;  
+    this.capaFull = capa;
   }
 
-   // Handle Update button click
-   onUpdateNaoLido(hq:any) {
+  // Handle Update button click
+  onUpdateNaoLido(hq: any) {
     this.hqAtualiza = hq;
 
-    if (this.hqAtualiza.dataLeitura === null)
-        this.showError('Erro!', 'Esta HQ já esta marcada como não lida');
-    else
-    {
+    if (this.hqAtualiza.dataLeitura === null) this.showError('Erro!', 'Esta HQ já esta marcada como não lida');
+    else {
       //this.hqAtualiza.dataLeitura = null;
       this.hqAtualiza.lido = 0;
       this.put(this.hqAtualiza.id, this.hqAtualiza);
-    }    
+    }
   }
 
   // CRUD > Update, map to REST/HTTP PUT
   put(id: any, data: any): void {
-    this.apiHttpService.put(this.apiEndpointsService.putLeituraPagedEndpoint(id),data).subscribe(
-        (resp: any) => {
-            this.showSuccess('Sucesso!', 'Lista de leitura atualizada');
-            (async () => {   
-              await this.delay(2000);  
-              window.location.reload();
-             })();  
-            },
-            (error) => {
-              log.debug(error);
-            }
-          );
+    this.apiHttpService.put(this.apiEndpointsService.putLeituraPagedEndpoint(id), data).subscribe(
+      (resp: any) => {
+        this.showSuccess('Sucesso!', 'Lista de leitura atualizada');
+        (async () => {
+          await this.delay(2000);
+          window.location.reload();
+        })();
+      },
+      (error) => {
+        log.debug(error);
+      }
+    );
   }
 
   // Handle Delete button click
@@ -106,19 +103,19 @@ export class ListaLeituraComponent implements OnInit {
   }
 
   delay(ms: number) {
-    return new Promise( resolve => setTimeout(resolve, ms) );
-   } 
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
 
-   // CRUD > Delete, map to REST/HTTP DELETE
-   delete(id: any): void {
+  // CRUD > Delete, map to REST/HTTP DELETE
+  delete(id: any): void {
     this.apiHttpService.delete(this.apiEndpointsService.deleteLeituraByIdEndpoint(id), id).subscribe(
       (resp: any) => {
         this.showSuccess('Sucesso!', 'HQ excluida');
-        (async () => {   
-          await this.delay(2000);  
+        (async () => {
+          await this.delay(2000);
           // Do something after
           window.location.reload();
-         })();  
+        })();
       },
       (error) => {
         log.debug(error);
@@ -126,8 +123,8 @@ export class ListaLeituraComponent implements OnInit {
     );
   }
 
-   // ngbmodal service
-   showSuccess(headerText: string, bodyText: string) {
+  // ngbmodal service
+  showSuccess(headerText: string, bodyText: string) {
     this.toastService.show(bodyText, {
       classname: 'bg-success text-light',
       delay: 4000,
@@ -136,8 +133,8 @@ export class ListaLeituraComponent implements OnInit {
     });
   }
 
-   // ngbmodal service
-   showError(headerText: string, bodyText: string) {
+  // ngbmodal service
+  showError(headerText: string, bodyText: string) {
     this.toastService.show(bodyText, {
       classname: 'bg-danger text-light',
       delay: 10000,
@@ -194,16 +191,16 @@ export class ListaLeituraComponent implements OnInit {
           data: 'capa',
         },
         {
-            title: '',
-            data: '',
+          title: '',
+          data: '',
         },
         {
-            title: '',
-            data: '',
+          title: '',
+          data: '',
         },
         {
-            title: '',
-            data: '',
+          title: '',
+          data: '',
         },
       ],
     };

@@ -10,9 +10,18 @@ const routes: Routes = [
       path: 'listaeditora',
       loadChildren: () => import('./cadastro/listaeditora.module').then((m) => m.ListaEditoraModule),
     },
-    { path: 'listahqavancado', loadChildren: () => import('./cadastro/listahqavancado.module').then((m) => m.ListaHQAvancadoModule) },
-    { path: 'listadesejo', loadChildren: () => import('./cadastro/listadesejo.module').then((m) => m.ListaDesejoModule) },
-    { path: 'listaleitura', loadChildren: () => import('./cadastro/listaleitura.module').then((m) => m.ListaLeituraModule) },
+    {
+      path: 'listahqavancado',
+      loadChildren: () => import('./cadastro/listahqavancado.module').then((m) => m.ListaHQAvancadoModule),
+    },
+    {
+      path: 'listadesejo',
+      loadChildren: () => import('./cadastro/listadesejo.module').then((m) => m.ListaDesejoModule),
+    },
+    {
+      path: 'listaleitura',
+      loadChildren: () => import('./cadastro/listaleitura.module').then((m) => m.ListaLeituraModule),
+    },
     { path: 'home', loadChildren: () => import('./home/home.module').then((m) => m.HomeModule) },
     { path: 'hq', loadChildren: () => import('./cadastro/hq.module').then((m) => m.HQModule) },
     { path: 'listahq', loadChildren: () => import('./cadastro/listahq.module').then((m) => m.ListaHQModule) },

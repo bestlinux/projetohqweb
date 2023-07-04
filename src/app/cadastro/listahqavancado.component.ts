@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DataTablesResponse } from '@shared/classes/data-tables-response';
@@ -17,7 +17,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { Router } from '@angular/router';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 const log = new Logger('Lista HQ Avancado');
 
@@ -27,8 +27,8 @@ const log = new Logger('Lista HQ Avancado');
   styleUrls: ['./listahqavancado.component.scss'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
@@ -74,7 +74,7 @@ export class ListaHQAvancadoComponent implements OnInit {
   usuarioLogado: any;
   isLoadFullImage: boolean = false;
   capaFull: any;
-  
+
   constructor(
     public toastService: ToastService,
     private route: ActivatedRoute,
@@ -84,12 +84,10 @@ export class ListaHQAvancadoComponent implements OnInit {
     private confirmationDialogService: ConfirmationDialogService,
     private constants: Constants,
     private router: Router
-  ) 
-  {
+  ) {
     this.usuarioLogado = localStorage.getItem('logado');
-           
-    if (this.usuarioLogado === 'false')
-    {
+
+    if (this.usuarioLogado === 'false') {
       this.router.navigateByUrl('/login');
     }
 
@@ -118,7 +116,7 @@ export class ListaHQAvancadoComponent implements OnInit {
       //this.entryForm.reset();
     });
   }
-  
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -196,7 +194,6 @@ export class ListaHQAvancadoComponent implements OnInit {
     log.debug('OnInsert: ', this.entryForm.get('titulo').value);
   }
 
-  
   // Handle Create button click
   onSearch() {
     this.dataSource.sort = this.sort;
@@ -220,7 +217,6 @@ export class ListaHQAvancadoComponent implements OnInit {
     //log.debug('OnSearch: ', this.entryForm.value);
     //log.debug('OnSearch: ', this.entryForm.get('titulo').value);
   }
-
 
   advancedSearch(
     titulo: any,
@@ -251,16 +247,16 @@ export class ListaHQAvancadoComponent implements OnInit {
 
     if (lido == undefined || lido == null) lido = 1;
 
-    if (editora == '' || editora == null) editora = "null";
+    if (editora == '' || editora == null) editora = 'null';
 
-    if (anoLancamento == '' || anoLancamento == null) anoLancamento = "null";
+    if (anoLancamento == '' || anoLancamento == null) anoLancamento = 'null';
 
-    if (titulo == '' || titulo == null) titulo = "null";
+    if (titulo == '' || titulo == null) titulo = 'null';
 
-    if (personagens == '' || personagens == null) personagens = "null";
+    if (personagens == '' || personagens == null) personagens = 'null';
 
-    if (roteiro == '' || roteiro == null) roteiro = "null";
-    
+    if (roteiro == '' || roteiro == null) roteiro = 'null';
+
     this.apiHttpService
       .get(
         this.apiEndpointsService.getHQAdvancedSearchEndpoint(
@@ -274,7 +270,7 @@ export class ListaHQAvancadoComponent implements OnInit {
           titulo,
           roteiro,
           personagens,
-          editora,
+          editora
         ),
         titulo
       )
@@ -305,8 +301,8 @@ export class ListaHQAvancadoComponent implements OnInit {
       });
   }
 
-   // CRUD > Delete, map to REST/HTTP DELETE
-   delete(id: any): void {
+  // CRUD > Delete, map to REST/HTTP DELETE
+  delete(id: any): void {
     this.apiHttpService.delete(this.apiEndpointsService.deleteHQByIdEndpoint(id), id).subscribe(
       (resp: any) => {
         this.showSuccess('Sucesso!', 'HQ excluida');
@@ -333,7 +329,7 @@ export class ListaHQAvancadoComponent implements OnInit {
       formato: [''],
       lido: [''],
       personagens: [''],
-      roteiro: ['']
+      roteiro: [''],
     });
   }
   // ngbmodal service

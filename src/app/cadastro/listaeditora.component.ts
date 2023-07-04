@@ -20,17 +20,16 @@ export class ListaEditoraComponent implements OnInit {
   usuarioLogado: any;
 
   constructor(
-    private apiHttpService: ApiHttpService, private apiEndpointsService: ApiEndpointsService, private router: Router)
-    
-    {
+    private apiHttpService: ApiHttpService,
+    private apiEndpointsService: ApiEndpointsService,
+    private router: Router
+  ) {
+    this.usuarioLogado = localStorage.getItem('logado');
 
-      this.usuarioLogado = localStorage.getItem('logado');
-           
-      if (this.usuarioLogado === 'false')
-      {
-        this.router.navigateByUrl('/login');
-      }
+    if (this.usuarioLogado === 'false') {
+      this.router.navigateByUrl('/login');
     }
+  }
 
   ngOnInit() {
     this.dtOptions = {

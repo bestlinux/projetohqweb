@@ -100,21 +100,11 @@
               </label>
               <label for="preco" *ngIf="!this.isAddNew">Preço</label>
               <label class="d-block" *ngIf="!this.isAddNew">
-                <input
-                    type="text"
-                    class="form-control"
-                    formControlName="preco"
-                    readonly
-                  />
+                <input type="text" class="form-control" formControlName="preco" readonly />
               </label>
               <label for="dtPublicacao" *ngIf="!this.isAddNew">Data de Publicação</label>
               <label class="d-block" *ngIf="!this.isAddNew">
-                <input
-                    type="text"
-                    class="form-control"
-                    formControlName="dtPublicacao"
-                    readonly
-                  />
+                <input type="text" class="form-control" formControlName="dtPublicacao" readonly />
               </label>
               <label for="capa" *ngIf="!this.isAddNew">Capa</label>
               <label class="d-block" *ngIf="!this.isAddNew">
@@ -179,25 +169,15 @@
               </label>
               <label for="licenciador" *ngIf="!this.isAddNew">Licenciador</label>
               <label class="d-block" *ngIf="!this.isAddNew">
-                <input
-                    type="text"
-                    class="form-control"
-                    formControlName="licenciador"
-                    readonly
-                  />
+                <input type="text" class="form-control" formControlName="licenciador" readonly />
               </label>
               <label for="numeroPaginas" *ngIf="!this.isAddNew">Número de Páginas</label>
               <label class="d-block" *ngIf="!this.isAddNew">
-                <input
-                    type="text"
-                    class="form-control"
-                    formControlName="numeroPaginas"
-                    readonly
-                  />
+                <input type="text" class="form-control" formControlName="numeroPaginas" readonly />
               </label>
               <label for="personagens" *ngIf="!this.isAddNew">Personagens</label>
               <label class="d-block" *ngIf="!this.isAddNew">
-                <textarea class="form-control" formControlName="personagens"  rows="3"  readonly></textarea>
+                <textarea class="form-control" formControlName="personagens" rows="3" readonly></textarea>
               </label>
               <label for="roteiro" *ngIf="!this.isAddNew">Desenho/Roteiro/ArteFinal</label>
               <label class="d-block" *ngIf="!this.isAddNew">
@@ -217,7 +197,7 @@
           <div class="card-body">
             <div class="col-sm"></div>
           </div>
-         <!-- <div class="row">
+          <!-- <div class="row">
             <div class="col-sm">
               <div class="col-sm-3">
                 <button
@@ -283,14 +263,10 @@
               <ng-container matColumnDef="desejo">
                 <th mat-header-cell *matHeaderCellDef>Desejo</th>
                 <td mat-cell *matCellDef="let hq">
-                  <button
-                  (click)="desejoCreate(hq)"
-                  type="button"
-                  class="btn btn-primary"
-                >
-                <span translate><i class="fas fa-lightbulb"></i> Desejo</span>
-                </button>
-                <div class="spinner-border" role="status" id="spinner" *ngIf="isLoadingDesejo"></div>
+                  <button (click)="desejoCreate(hq)" type="button" class="btn btn-primary">
+                    <span translate><i class="fas fa-lightbulb"></i> Desejo</span>
+                  </button>
+                  <div class="spinner-border" role="status" id="spinner" *ngIf="isLoadingDesejo"></div>
                 </td>
               </ng-container>
 
@@ -347,9 +323,15 @@
         </div>
         <div class="float-right">
           <!-- HTML markup for Back button -->
-          <a class="btn text-dark" [routerLink]="['/listahq']" *ngIf="!this.voltarHqAvancado && !this.voltarHqLeitura"><i class="fa fa-arrow-left"></i> Back</a>
-          <a class="btn text-dark" [routerLink]="['/listahqavancado']" *ngIf="this.voltarHqAvancado"><i class="fa fa-arrow-left"></i> Back</a>
-          <a class="btn text-dark" [routerLink]="['/listaleitura']" *ngIf="this.voltarHqLeitura"><i class="fa fa-arrow-left"></i> Back</a>
+          <a class="btn text-dark" [routerLink]="['/listahq']" *ngIf="!this.voltarHqAvancado && !this.voltarHqLeitura"
+            ><i class="fa fa-arrow-left"></i> Back</a
+          >
+          <a class="btn text-dark" [routerLink]="['/listahqavancado']" *ngIf="this.voltarHqAvancado"
+            ><i class="fa fa-arrow-left"></i> Back</a
+          >
+          <a class="btn text-dark" [routerLink]="['/listaleitura']" *ngIf="this.voltarHqLeitura"
+            ><i class="fa fa-arrow-left"></i> Back</a
+          >
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd, ActivatedRoute,NavigationStart  } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute, NavigationStart } from '@angular/router';
 
 @Component({
   selector: 'app-shell',
@@ -7,14 +7,11 @@ import { Router, NavigationEnd, ActivatedRoute,NavigationStart  } from '@angular
   styleUrls: ['./shell.component.scss'],
 })
 export class ShellComponent implements OnInit {
-  
   mostrarCabecalho: boolean;
   existeUsuario: any;
-  
-  constructor(private router: Router) 
-  {
-    if (this.existeUsuario == undefined)
-    {
+
+  constructor(private router: Router) {
+    if (this.existeUsuario == undefined) {
       this.mostrarCabecalho = true;
     }
 
@@ -34,9 +31,6 @@ export class ShellComponent implements OnInit {
       }
     });
   }
-  
-  ngOnInit() 
-  {
-   
-  }
+
+  ngOnInit() {}
 }

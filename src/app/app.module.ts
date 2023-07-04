@@ -1,4 +1,3 @@
-
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
@@ -27,7 +26,7 @@ import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeBr from '@angular/common/locales/pt';
 
-registerLocaleData(localeBr, 'pt')
+registerLocaleData(localeBr, 'pt');
 @NgModule({
   //IMPORTANTE: A ORDEM DA IMPORTACAO DO MODULOS AFETA A ROTA DAS PAGINAS
   imports: [
@@ -50,7 +49,7 @@ registerLocaleData(localeBr, 'pt')
     MatSliderModule,
   ],
   declarations: [AppComponent],
-  providers: [{provide: LOCALE_ID, useValue: 'pt' }],
+  providers: [{ provide: LOCALE_ID, useValue: 'pt' }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

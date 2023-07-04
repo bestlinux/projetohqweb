@@ -25,7 +25,7 @@ import { DataTablesModule } from 'angular-datatables';
     RxReactiveFormsModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
-    DataTablesModule
+    DataTablesModule,
   ],
   declarations: [FrasesComponent],
 })

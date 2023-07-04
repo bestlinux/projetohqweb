@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute,Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DataTablesResponse } from '@shared/classes/data-tables-response';
 import { Logger } from '@core';
@@ -60,7 +60,7 @@ export class HQComponent implements OnInit {
   voltarHqLeitura: boolean = false;
   rotaBotaoVoltar: any;
   usuarioLogado: any;
-  
+
   constructor(
     public toastService: ToastService,
     private route: ActivatedRoute,
@@ -69,19 +69,16 @@ export class HQComponent implements OnInit {
     private apiEndpointsService: ApiEndpointsService,
     private confirmationDialogService: ConfirmationDialogService,
     private constants: Constants,
-    private router: Router,
-  ) 
-  {    
+    private router: Router
+  ) {
     this.usuarioLogado = localStorage.getItem('logado');
-           
-    if (this.usuarioLogado === 'false')
-    {
+
+    if (this.usuarioLogado === 'false') {
       this.router.navigateByUrl('/login');
     }
 
     this.createForm();
   }
-
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
@@ -149,23 +146,19 @@ export class HQComponent implements OnInit {
         this.formMode = 'Edit';
         this.voltarHqAvancado = false;
         this.voltarHqLeitura = false;
-      }     
-      else {
+      } else {
         this.isAddNew = true;
         this.formMode = 'New';
       }
 
       //VOLTA PARA A TELA DE BUSCA AVANCADA
-      if (this.rotaBotaoVoltar !== undefined)
-      {
-        if (this.rotaBotaoVoltar === 'Leitura')
-        {
+      if (this.rotaBotaoVoltar !== undefined) {
+        if (this.rotaBotaoVoltar === 'Leitura') {
           this.read(this.route.snapshot.paramMap.get('id'));
           this.formMode = 'Edit';
           this.voltarHqLeitura = true;
         }
-        if (this.rotaBotaoVoltar === 'BuscaAvancada')
-        {
+        if (this.rotaBotaoVoltar === 'BuscaAvancada') {
           this.read(this.route.snapshot.paramMap.get('id'));
           this.formMode = 'Edit';
           this.voltarHqAvancado = true;
@@ -434,7 +427,7 @@ export class HQComponent implements OnInit {
       preco: [''],
       dtPublicacao: [''],
       personagens: [''],
-      roteiro: ['']
+      roteiro: [''],
     });
   }
   // ngbmodal service

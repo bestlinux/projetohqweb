@@ -46,42 +46,41 @@ export class ColecaoComponent implements OnInit {
     private router: Router
   ) {
     this.usuarioLogado = localStorage.getItem('logado');
-           
-    if (this.usuarioLogado === 'false')
-    {
+
+    if (this.usuarioLogado === 'false') {
       this.router.navigateByUrl('/login');
     }
 
     this.createForm();
   }
-   // Handle Delete button click
-   onDelee(id: any) {
+  // Handle Delete button click
+  onDelee(id: any) {
     this.confirmationDialogService
-    .confirm('Colecao', 'Tem certeza que deseja excluir ?')
-    .then((confirmed) => {
-      if (confirmed) {
-        this.delete(id);
-        log.debug('onDelee: ', id);
-        //this.router.navigateByUrl('/listaeditora');
-      }
-    })
-    .catch(() => {
-      log.debug('onDelee: ', 'Cancel');
-    });
+      .confirm('Colecao', 'Tem certeza que deseja excluir ?')
+      .then((confirmed) => {
+        if (confirmed) {
+          this.delete(id);
+          log.debug('onDelee: ', id);
+          //this.router.navigateByUrl('/listaeditora');
+        }
+      })
+      .catch(() => {
+        log.debug('onDelee: ', 'Cancel');
+      });
   }
 
   // CRUD > Delete, map to REST/HTTP DELETE
   delete(id: any): void {
-    log.debug("deletando");
+    log.debug('deletando');
     this.apiHttpService.delete(this.apiEndpointsService.deleteColecaoByIdEndpoint(id), id).subscribe(
       (resp: any) => {
         log.debug(resp);
         this.showSuccess('Sucesso!', 'Colecao excluida');
-        (async () => {   
-          await this.delay(2000);  
+        (async () => {
+          await this.delay(2000);
           // Do something after
           window.location.reload();
-         })();  
+        })();
       },
       (error) => {
         log.debug(error);
@@ -154,30 +153,30 @@ export class ColecaoComponent implements OnInit {
     const formData = new FormData();
 
     formData.append(this.file.name, this.file);
-    formData.append("Descricao", this.entryFormColecao.get('descricao').value)
+    formData.append('Descricao', this.entryFormColecao.get('descricao').value);
 
     const uploadReq = new HttpRequest('POST', this.apiEndpointsService.postImageColecaoUploadEndpoint(), formData, {
       reportProgress: true,
     });
- 
+
     this.apiHttpService.request(uploadReq).subscribe((resp: any) => {
       if (resp.type === HttpEventType.UploadProgress) {
         this.progress = Math.round((100 * resp.loaded) / resp.total);
       } else if (resp.type === HttpEventType.Response) {
         this.progress = 0;
         this.showSuccess('Sucesso!', 'Upload da imagem feito com sucesso');
-        (async () => {   
-          await this.delay(2000);  
+        (async () => {
+          await this.delay(2000);
           // Do something after
           window.location.reload();
-         })();       
+        })();
       }
     });
   }
 
-   delay(ms: number) {
-    return new Promise( resolve => setTimeout(resolve, ms) );
-   } 
+  delay(ms: number) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
 
   // reactive form
   private createForm() {

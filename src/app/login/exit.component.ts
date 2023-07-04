@@ -14,24 +14,20 @@ const log = new Logger('Exit');
   templateUrl: './exit.component.html',
 })
 export class ExitComponent implements OnInit {
-  
   existeUsuario: any;
 
   constructor(
-      private tokenStorage: TokenStorageService,
-      private apiHttpService: ApiHttpService,
-      private apiEndpointsService: ApiEndpointsService,
-      private router: Router,
-      public toastService: ToastService) 
-      { 
-
-      }
+    private tokenStorage: TokenStorageService,
+    private apiHttpService: ApiHttpService,
+    private apiEndpointsService: ApiEndpointsService,
+    private router: Router,
+    public toastService: ToastService
+  ) {}
 
   ngOnInit(): void {
     this.existeUsuario = false;
     localStorage.setItem('logado', this.existeUsuario);
     //console.log('curent status is Exit ' + this.existeUsuario);
     this.router.navigateByUrl('/login');
-   }
-  
+  }
 }

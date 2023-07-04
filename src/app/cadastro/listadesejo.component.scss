@@ -1,29 +1,28 @@
 .logo {
-    width: 100px;
-  }
-  
-  q {
-    font-style: italic;
-    font-size: 1.2rem;
-    quotes: "« " " »";
-  }
-  
-  .img-loading {
-    width: 30px;
-    height: 30px;
-  }
-  
-  .img-responsive {
-    width: 50px;
-    height: 50px;
-  }
-  
-  .img-full {
-    width: 400px;
-    height: 617px;
-  }
-  
-  ::ng-deep table.dataTable td.dataTables_empty {
-    display: none;
-  }
-  
+  width: 100px;
+}
+
+q {
+  font-style: italic;
+  font-size: 1.2rem;
+  quotes: "« " " »";
+}
+
+.img-loading {
+  width: 30px;
+  height: 30px;
+}
+
+.img-responsive {
+  width: 50px;
+  height: 50px;
+}
+
+.img-full {
+  width: 400px;
+  height: 617px;
+}
+
+::ng-deep table.dataTable td.dataTables_empty {
+  display: none;
+}

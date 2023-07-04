@@ -4,51 +4,28 @@
       <a class="navbar-brand" href="/" translate>APP_NAME</a>
     </nav>
   </header>
-</div>        
-      <div class="col-md-12">
-      <div class="card card-container">
-        <form [formGroup]="form" novalidate>
-          <div class="form-group">
-            <label for="username">Usuário</label>
-            <input
-              type="text"
-              class="form-control"
-              name="username"
-              formControlName="username"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="password">Senha</label>
-            <input
-              type="password"
-              class="form-control"
-              formControlName="password"
-              name="password"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <button
-            (click)="onSubmit()"
-            class="btn btn-primary w-20"
-            type="submit"
-            [disabled]="form.invalid"
-            >
-            <span translate><i class="fas fa-sign-in-alt"></i> Login</span>
-            </button>
-          </div>      
-          <div
-          *ngIf="isLoading"
-          style="display: flex; justify-content: center; align-items: center; background: white"
-          >
-            <mat-progress-spinner color="primary" mode="indeterminate"> </mat-progress-spinner>
-          </div>    
-        </form>
-    
-        <div class="alert alert-success" *ngIf="isLoggedIn">
-          Logged in as {{ roles }}.
-        </div>
+</div>
+<div class="col-md-12">
+  <div class="card card-container">
+    <form [formGroup]="form" novalidate>
+      <div class="form-group">
+        <label for="username">Usuário</label>
+        <input type="text" class="form-control" name="username" formControlName="username" required />
       </div>
-    </div>
-    
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input type="password" class="form-control" formControlName="password" name="password" required />
+      </div>
+      <div class="form-group">
+        <button (click)="onSubmit()" class="btn btn-primary w-20" type="submit" [disabled]="form.invalid">
+          <span translate><i class="fas fa-sign-in-alt"></i> Login</span>
+        </button>
+      </div>
+      <div *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center; background: white">
+        <mat-progress-spinner color="primary" mode="indeterminate"> </mat-progress-spinner>
+      </div>
+    </form>
+
+    <div class="alert alert-success" *ngIf="isLoggedIn">Logged in as {{ roles }}.</div>
+  </div>
+</div>

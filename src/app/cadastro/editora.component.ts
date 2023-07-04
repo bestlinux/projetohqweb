@@ -40,12 +40,11 @@ export class EditoraComponent implements OnInit {
     private router: Router
   ) {
     this.usuarioLogado = localStorage.getItem('logado');
-           
-    if (this.usuarioLogado === 'false')
-    {
+
+    if (this.usuarioLogado === 'false') {
       this.router.navigateByUrl('/login');
     }
-    
+
     this.createForm();
   }
 

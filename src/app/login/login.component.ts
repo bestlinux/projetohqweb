@@ -13,7 +13,7 @@ const log = new Logger('Login');
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
   isLoggedIn = false;
@@ -25,15 +25,15 @@ export class LoginComponent implements OnInit {
   isLoading = false;
 
   constructor(
-      private tokenStorage: TokenStorageService,
-      private apiHttpService: ApiHttpService,
-      private apiEndpointsService: ApiEndpointsService,
-      private router: Router,
-      private formBuilder: FormBuilder,
-      public toastService: ToastService) 
-      { 
-        this.createForm();
-      }
+    private tokenStorage: TokenStorageService,
+    private apiHttpService: ApiHttpService,
+    private apiEndpointsService: ApiEndpointsService,
+    private router: Router,
+    private formBuilder: FormBuilder,
+    public toastService: ToastService
+  ) {
+    this.createForm();
+  }
 
   ngOnInit(): void {
     this.existeUsuario = false;
@@ -45,15 +45,10 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const 
-    { 
-      username,
-      password 
-    } = this.form.value;
+    const { username, password } = this.form.value;
     this.isLoading = true;
     this.login(username, password);
   }
-
 
   login(usuario: any, senha: any): void {
     this.apiHttpService.get(this.apiEndpointsService.getLoginQueryEndpoint(usuario, senha), usuario).subscribe(
@@ -62,22 +57,19 @@ export class LoginComponent implements OnInit {
         //Assign data to class-level model object.
         this.existeUsuario = resp.data;
 
-        if (this.existeUsuario == true) 
-        {
-            this.isLoading = false;
-            localStorage.setItem('logado', this.existeUsuario);
+        if (this.existeUsuario == true) {
+          this.isLoading = false;
+          localStorage.setItem('logado', this.existeUsuario);
 
-            this.isLoginFailed = false;
-            this.isLoggedIn = true;
-            this.roles = this.tokenStorage.getUser().roles;
-            //this.reloadPage();
-            this.router.navigateByUrl('/home');
-        } 
-        else 
-        {
-            this.showError('Erro!', 'Falha ao realizar o login');
-            this.isLoading = false;
-            this.isLoginFailed = true;
+          this.isLoginFailed = false;
+          this.isLoggedIn = true;
+          this.roles = this.tokenStorage.getUser().roles;
+          //this.reloadPage();
+          this.router.navigateByUrl('/home');
+        } else {
+          this.showError('Erro!', 'Falha ao realizar o login');
+          this.isLoading = false;
+          this.isLoginFailed = true;
         }
       },
       (error) => {
@@ -90,20 +82,20 @@ export class LoginComponent implements OnInit {
     window.location.reload();
   }
 
-    // ngbmodal service
+  // ngbmodal service
   showError(headerText: string, bodyText: string) {
-        this.toastService.show(bodyText, {
-          classname: 'bg-danger text-light',
-          delay: 4000,
-          autohide: true,
-          headertext: headerText,
-        });
+    this.toastService.show(bodyText, {
+      classname: 'bg-danger text-light',
+      delay: 4000,
+      autohide: true,
+      headertext: headerText,
+    });
   }
-   // reactive form
-   private createForm() {
+  // reactive form
+  private createForm() {
     this.form = this.formBuilder.group({
       username: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
     });
   }
 }

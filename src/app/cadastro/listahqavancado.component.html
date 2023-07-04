@@ -1,286 +1,249 @@
 <div class="container-fluid">
-    <!-- HTML form mark up -->
-    <form [formGroup]="entryForm" novalidate>
-      <div class="card">
-        <div class="card-header">
-          <div class="float-left"><h3 class="text-info">Busca Avançada de HQ</h3></div>
-          <div class="float-right">
-            <!-- HTML markup for form mode New or Edit -->
-          </div>
+  <!-- HTML form mark up -->
+  <form [formGroup]="entryForm" novalidate>
+    <div class="card">
+      <div class="card-header">
+        <div class="float-left"><h3 class="text-info">Busca Avançada de HQ</h3></div>
+        <div class="float-right">
+          <!-- HTML markup for form mode New or Edit -->
         </div>
-        <div class="card-body">
-          <div class="alert alert-danger" [hidden]="!error" translate>Titulo, Editora incorretos.</div>
-          <div class="form-group">
-            <div class="row">
-              <div class="col-sm">
-                <label for="titulo">Titulo</label>
-                <label class="d-block">
-                  <input
-                    type="text"
-                    class="form-control"
-                    formControlName="titulo"
-                  />
-                  <!--<img class="img-responsive" src="assets/capas/image1.jpg" alt="Angular" loading="lazy"/>-->
-                </label>
-                <label id="editora" for="editora">Editora</label>
-                <label class="d-block">
-                  <select
-                    class="form-control"
-                    formControlName="editora"
-                    id="editora"
-                    [(ngModel)]="selectedEditora"
-                  >
-                    <option *ngFor="let editora of editoras" [value]="editora.nome">{{ editora.nome }}</option>
-                  </select>
-                </label>
-                <label for="status">Status</label>
-                <label class="d-block">
-                  <select
-                    class="form-control"
-                    formControlName="status"
-                    id="status"
-                    [(ngModel)]="selectedStatus"
-                  >
-                    <option *ngFor="let statu of status" [value]="statu.codigo">{{ statu.nome }}</option>
-                  </select>
-                </label>
-                <label for="status">Formato</label>
-                <label class="d-block">
-                  <select
-                    class="form-control"
-                    formControlName="formato"
-                    id="formato"
-                    [(ngModel)]="selectedFormato"
-                  >
-                    <option *ngFor="let formato of formatos" [value]="formato.codigo">{{ formato.nome }}</option>
-                  </select>
-                </label>
-                <label for="roteiro">Desenho/Roteiro/ArteFinal</label>
-                <label class="d-block">
-                  <input
-                  type="text"
+      </div>
+      <div class="card-body">
+        <div class="alert alert-danger" [hidden]="!error" translate>Titulo, Editora incorretos.</div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-sm">
+              <label for="titulo">Titulo</label>
+              <label class="d-block">
+                <input type="text" class="form-control" formControlName="titulo" />
+                <!--<img class="img-responsive" src="assets/capas/image1.jpg" alt="Angular" loading="lazy"/>-->
+              </label>
+              <label id="editora" for="editora">Editora</label>
+              <label class="d-block">
+                <select class="form-control" formControlName="editora" id="editora" [(ngModel)]="selectedEditora">
+                  <option *ngFor="let editora of editoras" [value]="editora.nome">{{ editora.nome }}</option>
+                </select>
+              </label>
+              <label for="status">Status</label>
+              <label class="d-block">
+                <select class="form-control" formControlName="status" id="status" [(ngModel)]="selectedStatus">
+                  <option *ngFor="let statu of status" [value]="statu.codigo">{{ statu.nome }}</option>
+                </select>
+              </label>
+              <label for="status">Formato</label>
+              <label class="d-block">
+                <select class="form-control" formControlName="formato" id="formato" [(ngModel)]="selectedFormato">
+                  <option *ngFor="let formato of formatos" [value]="formato.codigo">{{ formato.nome }}</option>
+                </select>
+              </label>
+              <label for="roteiro">Desenho/Roteiro/ArteFinal</label>
+              <label class="d-block">
+                <input type="text" class="form-control" formControlName="roteiro" />
+              </label>
+            </div>
+            <div class="col-sm">
+              <label for="anoLancamento">Ano de Lançamento</label>
+              <label class="d-block">
+                <input type="text" class="form-control" formControlName="anoLancamento" />
+              </label>
+              <label for="numeroEdicao">Número da Edição</label>
+              <label class="d-block">
+                <input type="text" class="form-control" formControlName="numeroEdicao" />
+              </label>
+              <label for="categoria">Categoria</label>
+              <label class="d-block">
+                <select class="form-control" id="categoria" formControlName="categoria" [(ngModel)]="selectedCategoria">
+                  <option *ngFor="let categoria of categorias" [value]="categoria.codigo">{{ categoria.nome }}</option>
+                </select>
+              </label>
+              <label for="categoria">Genero</label>
+              <label class="d-block">
+                <select
                   class="form-control"
-                  formControlName="roteiro"
-                 />
-                </label>
-              </div>
-              <div class="col-sm">
-                <label for="anoLancamento">Ano de Lançamento</label>
-                <label class="d-block">
-                  <input
-                    type="text"
-                    class="form-control"
-                    formControlName="anoLancamento"
-                  />
-                </label>
-                <label for="numeroEdicao">Número da Edição</label>
-                <label class="d-block">
-                  <input
-                    type="text"
-                    class="form-control"
-                    formControlName="numeroEdicao"
-                  />
-                </label>
-                <label for="categoria">Categoria</label>
-                <label class="d-block">
-                  <select
-                    class="form-control"
-                    id="categoria"
-                    formControlName="categoria"
-                    [(ngModel)]="selectedCategoria"
-                  >
-                    <option *ngFor="let categoria of categorias" [value]="categoria.codigo">{{ categoria.nome }}</option>
-                  </select>
-                </label>
-                <label for="categoria">Genero</label>
-                <label class="d-block">
-                  <select
-                    class="form-control"
-                    id="genero"
-                    formControlName="genero"
-                    [(ngModel)]="selectedGenero"
-                    data-live-search="true"
-                  >
-                    <option *ngFor="let genero of generos" [value]="genero.codigo">{{ genero.nome }}</option>
-                  </select>
-                </label>
-                <label for="lido">Lido</label>
-                <label class="d-block">
-                  <select
-                    class="form-control"
-                    id="lido"
-                    formControlName="lido"
-                    [(ngModel)]="selectedLido"
-                    data-live-search="true"
-                  >
-                    <option *ngFor="let lido of lidos" [value]="lido.codigo">{{ lido.nome }}</option>
-                  </select>
-                </label>
-                <label for="personagens">Personagens</label>
-                <label class="d-block">
-                  <input
-                  type="text"
-                  class="form-control"
-                  formControlName="personagens"
-                 />
-                </label>               
-                <button
-                  (click)="onSearch()"
-                  class="btn btn-danger w-20"
-                  type="submit"
+                  id="genero"
+                  formControlName="genero"
+                  [(ngModel)]="selectedGenero"
+                  data-live-search="true"
                 >
-                  <span translate><i class="fas fa-search"></i> Buscar</span>
-                </button>
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="col-sm"></div>
-            </div>
-          </div>
-        </div>
-        <div class="container-fluid">
-          <div class="card">
-            <div class="card-header">
-              <div class="float-left"><h3 class="text-info">HQs encontradas</h3></div>
-            </div>
-            <mat-form-field>
-              <mat-label>Filter</mat-label>
-              <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Batman" #input>
-            </mat-form-field>
-             <!-- Modal -->
-            <div class="modal fade" id="modalDetalhes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <img class="img-full" src="http://127.0.0.1:8887/Capas/{{ capaFull }}" alt="Angular" />
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="card-body">
-              <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort class="mat-elevation-z8">
-                  
-                <!-- Position Column -->
-                <ng-container matColumnDef="titulo">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Titulo</th>
-                  <td mat-cell *matCellDef="let hq"><a [routerLink]="['/hq', hq.id, 'BuscaAvancada']">{{ hq.titulo }}</a></td>
-                </ng-container>
-                
-                    <!-- Position Column -->
-                <ng-container matColumnDef="created">
-                   <th mat-header-cell *matHeaderCellDef mat-sort-header>Data de Criação</th>
-                   <td mat-cell *matCellDef="let hq">{{ hq.created | date: 'dd/MM/yyyy HH:mm' }}</td>
-                </ng-container>
-
-                <!-- Name Column -->
-                <ng-container matColumnDef="linkDetalhes">
-                  <th mat-header-cell *matHeaderCellDef>Link Detalhes</th>
-                  <td mat-cell *matCellDef="let hq"><a href="{{ hq.linkDetalhes }}" target="_blank">Link detalhes</a></td>
-                </ng-container>
-
-                <ng-container matColumnDef="expandedDetail">
-                  <td mat-cell *matCellDef="let hq" [attr.colspan]="displayedColumns.length">
-                    <div class="example-element-detail"
-                         [@detailExpand]="hq == expandedElement ? 'expanded' : 'collapsed'">
-                      <div class="example-element-diagram">
-                        <div class="example-element-symbol">
-                          <img  (click)="exibeImagemFull(hq.capa)" class="img-responsive" src="http://127.0.0.1:8887/Capas/{{ hq.capa }}" alt="Capa" />
-                        </div>
-                      </div>
-                      <div class="example-element-description">
-                        Data de Publicação
-                        <span class="example-element-description-attribution">  {{hq.dataPublicacao}} </span>
-                      </div>
-                      <div class="example-element-description">
-                        Editora
-                        <span class="example-element-description-attribution">  {{hq.editora}} </span>
-                      </div>
-                      <div class="example-element-description">
-                        Preço
-                        <span class="example-element-description-attribution"> {{hq.preco}} </span>
-                      </div>
-                      <div class="example-element-description">
-                        <button
-                          (click)="exibeImagemFull(hq.capa)"
-                          type="button"
-                          class="btn btn-primary"
-                          data-bs-toggle="modal"
-                          data-bs-target="#modalDetalhes"
-                        >
-                        <span translate><i class="far fa-image"></i> Capa</span>
-                        </button>
-                        <button
-                        (click)="leituraCreate(hq)"
-                        type="button"
-                        class="btn btn-primary"
-                        >
-                         <span translate><i class="fas fa-book-open"></i> Iniciar Leitura</span>
-                        </button>
-                        <div class="spinner-border" role="status" id="spinner" *ngIf="isLoadingLeitura"></div>
-                      </div>
-                    </div>
-                  </td>
-                </ng-container>
-
-                <ng-container matColumnDef="acoes">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Ações</th>
-                  <td mat-cell *matCellDef="let hq">
-                    <button
-                    (click)="onDelete(hq.id)"
-                    class="btn btn-danger w-20"
-                    type="submit"
-                    >
-                    <span translate><i class="fas fa-trash-alt"></i> Excluir</span>
-                    </button>
-                  </td>
-               </ng-container>
-  
-                <!-- Weight Column -->
-                <!--<ng-container matColumnDef="thumbCapa">
-                  <th mat-header-cell *matHeaderCellDef> Capa </th>
-                  <td mat-cell *matCellDef="let hq"><a href="{{hq.thumbCapa}}" target="_blank">Capa</a></td>
-                </ng-container> -->
-  
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let element; columns: displayedColumns;"
-                    class="example-element-row"
-                    [class.example-expanded-row]="expandedElement === element"
-                    (click)="expandedElement = expandedElement === element ? null : element">
-                </tr>
-                <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-                <tr class="mat-row" *matNoDataRow>
-                  <td class="mat-cell" colspan="4">Não foi encontrada nenhuma HQ com o criterio informado</td>
-                </tr>
-              </table>
-              <mat-paginator [pageSizeOptions]="[100, 1000, 3000, 4000]" showFirstLastButtons></mat-paginator>
-              <div
-                *ngIf="isLoading"
-                style="display: flex; justify-content: center; align-items: center; background: white"
-              >
-                <mat-progress-spinner color="primary" mode="indeterminate"> </mat-progress-spinner>
-              </div>
+                  <option *ngFor="let genero of generos" [value]="genero.codigo">{{ genero.nome }}</option>
+                </select>
+              </label>
+              <label for="lido">Lido</label>
+              <label class="d-block">
+                <select
+                  class="form-control"
+                  id="lido"
+                  formControlName="lido"
+                  [(ngModel)]="selectedLido"
+                  data-live-search="true"
+                >
+                  <option *ngFor="let lido of lidos" [value]="lido.codigo">{{ lido.nome }}</option>
+                </select>
+              </label>
+              <label for="personagens">Personagens</label>
+              <label class="d-block">
+                <input type="text" class="form-control" formControlName="personagens" />
+              </label>
+              <button (click)="onSearch()" class="btn btn-danger w-20" type="submit">
+                <span translate><i class="fas fa-search"></i> Buscar</span>
+              </button>
             </div>
           </div>
-        </div>
-        <div class="card-body">
-          <div class="col-sm"></div>
-        </div>
-        <div class="card-footer">
-          <div class="float-left">
-            <!-- HTML markup for Create button -->
-            <!-- HTML markup for Delete button -->
-          </div>
-          <div class="float-right">
-            <!-- HTML markup for Back button -->
+          <div class="card-body">
+            <div class="col-sm"></div>
           </div>
         </div>
       </div>
-    </form>
-  </div>
-  
+      <div class="container-fluid">
+        <div class="card">
+          <div class="card-header">
+            <div class="float-left"><h3 class="text-info">HQs encontradas</h3></div>
+          </div>
+          <mat-form-field>
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Batman" #input />
+          </mat-form-field>
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="modalDetalhes"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <img class="img-full" src="http://127.0.0.1:8887/Capas/{{ capaFull }}" alt="Angular" />
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort class="mat-elevation-z8">
+              <!-- Position Column -->
+              <ng-container matColumnDef="titulo">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Titulo</th>
+                <td mat-cell *matCellDef="let hq">
+                  <a [routerLink]="['/hq', hq.id, 'BuscaAvancada']">{{ hq.titulo }}</a>
+                </td>
+              </ng-container>
+
+              <!-- Position Column -->
+              <ng-container matColumnDef="created">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Data de Criação</th>
+                <td mat-cell *matCellDef="let hq">{{ hq.created | date: 'dd/MM/yyyy HH:mm' }}</td>
+              </ng-container>
+
+              <!-- Name Column -->
+              <ng-container matColumnDef="linkDetalhes">
+                <th mat-header-cell *matHeaderCellDef>Link Detalhes</th>
+                <td mat-cell *matCellDef="let hq"><a href="{{ hq.linkDetalhes }}" target="_blank">Link detalhes</a></td>
+              </ng-container>
+
+              <ng-container matColumnDef="expandedDetail">
+                <td mat-cell *matCellDef="let hq" [attr.colspan]="displayedColumns.length">
+                  <div
+                    class="example-element-detail"
+                    [@detailExpand]="hq == expandedElement ? 'expanded' : 'collapsed'"
+                  >
+                    <div class="example-element-diagram">
+                      <div class="example-element-symbol">
+                        <img
+                          (click)="exibeImagemFull(hq.capa)"
+                          class="img-responsive"
+                          src="http://127.0.0.1:8887/Capas/{{ hq.capa }}"
+                          alt="Capa"
+                        />
+                      </div>
+                    </div>
+                    <div class="example-element-description">
+                      Data de Publicação
+                      <span class="example-element-description-attribution"> {{ hq.dataPublicacao }} </span>
+                    </div>
+                    <div class="example-element-description">
+                      Editora
+                      <span class="example-element-description-attribution"> {{ hq.editora }} </span>
+                    </div>
+                    <div class="example-element-description">
+                      Preço
+                      <span class="example-element-description-attribution"> {{ hq.preco }} </span>
+                    </div>
+                    <div class="example-element-description">
+                      <button
+                        (click)="exibeImagemFull(hq.capa)"
+                        type="button"
+                        class="btn btn-primary"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalDetalhes"
+                      >
+                        <span translate><i class="far fa-image"></i> Capa</span>
+                      </button>
+                      <button (click)="leituraCreate(hq)" type="button" class="btn btn-primary">
+                        <span translate><i class="fas fa-book-open"></i> Iniciar Leitura</span>
+                      </button>
+                      <div class="spinner-border" role="status" id="spinner" *ngIf="isLoadingLeitura"></div>
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="acoes">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Ações</th>
+                <td mat-cell *matCellDef="let hq">
+                  <button (click)="onDelete(hq.id)" class="btn btn-danger w-20" type="submit">
+                    <span translate><i class="fas fa-trash-alt"></i> Excluir</span>
+                  </button>
+                </td>
+              </ng-container>
+
+              <!-- Weight Column -->
+              <!--<ng-container matColumnDef="thumbCapa">
+                  <th mat-header-cell *matHeaderCellDef> Capa </th>
+                  <td mat-cell *matCellDef="let hq"><a href="{{hq.thumbCapa}}" target="_blank">Capa</a></td>
+                </ng-container> -->
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr
+                mat-row
+                *matRowDef="let element; columns: displayedColumns"
+                class="example-element-row"
+                [class.example-expanded-row]="expandedElement === element"
+                (click)="expandedElement = expandedElement === element ? null : element"
+              ></tr>
+              <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+              <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">Não foi encontrada nenhuma HQ com o criterio informado</td>
+              </tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[100, 1000, 3000, 4000]" showFirstLastButtons></mat-paginator>
+            <div
+              *ngIf="isLoading"
+              style="display: flex; justify-content: center; align-items: center; background: white"
+            >
+              <mat-progress-spinner color="primary" mode="indeterminate"> </mat-progress-spinner>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="col-sm"></div>
+      </div>
+      <div class="card-footer">
+        <div class="float-left">
+          <!-- HTML markup for Create button -->
+          <!-- HTML markup for Delete button -->
+        </div>
+        <div class="float-right">
+          <!-- HTML markup for Back button -->
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
