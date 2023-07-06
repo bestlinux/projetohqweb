@@ -18,6 +18,7 @@ describe('ShellComponent', () => {
       TestBed.configureTestingModule({
         imports: [RouterTestingModule, TranslateModule.forRoot(), I18nModule, NgbModule, CoreModule],
         declarations: [HeaderComponent, ShellComponent],
+        teardown: { destroyAfterEach: false },
       }).compileComponents();
     })
   );

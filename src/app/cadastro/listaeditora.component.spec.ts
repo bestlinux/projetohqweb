@@ -16,6 +16,7 @@ describe('ListaHQComponent', () => {
         imports: [CoreModule, SharedModule, HttpClientTestingModule],
         declarations: [ListaHQComponent],
         providers: [QuoteService],
+        teardown: { destroyAfterEach: false },
       }).compileComponents();
     })
   );

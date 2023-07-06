@@ -14,6 +14,7 @@ describe('LanguageSelectorComponent', () => {
         imports: [TranslateModule.forRoot()],
         declarations: [LanguageSelectorComponent],
         providers: [I18nService],
+        teardown: { destroyAfterEach: false },
       }).compileComponents();
     })
   );

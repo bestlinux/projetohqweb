@@ -7,6 +7,7 @@ describe('Shell', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ShellComponent],
+      teardown: { destroyAfterEach: false },
     });
   });
 

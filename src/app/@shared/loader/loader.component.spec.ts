@@ -10,6 +10,7 @@ describe('LoaderComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [LoaderComponent],
+        teardown: { destroyAfterEach: false },
       }).compileComponents();
     })
   );

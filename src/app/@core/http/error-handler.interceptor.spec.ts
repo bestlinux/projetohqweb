@@ -25,6 +25,7 @@ describe('ErrorHandlerInterceptor', () => {
           multi: true,
         },
       ],
+      teardown: { destroyAfterEach: false },
     });
 
     http = TestBed.inject(HttpClient);

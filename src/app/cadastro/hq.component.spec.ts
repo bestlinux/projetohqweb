@@ -10,6 +10,7 @@ describe('HQComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [HQComponent],
+        teardown: { destroyAfterEach: false },
       }).compileComponents();
     })
   );

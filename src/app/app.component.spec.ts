@@ -12,6 +12,7 @@ describe('AppComponent', () => {
         imports: [RouterTestingModule, TranslateModule.forRoot(), CoreModule],
         declarations: [AppComponent],
         providers: [],
+        teardown: { destroyAfterEach: false },
       }).compileComponents();
     })
   );

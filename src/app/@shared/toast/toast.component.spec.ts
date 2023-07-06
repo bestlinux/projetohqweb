@@ -9,6 +9,7 @@ describe('ToastComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ToastComponent],
+      teardown: { destroyAfterEach: false },
     }).compileComponents();
   });
 

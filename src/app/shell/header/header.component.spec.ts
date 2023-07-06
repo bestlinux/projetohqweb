@@ -16,6 +16,7 @@ describe('HeaderComponent', () => {
         imports: [RouterTestingModule, NgbModule, TranslateModule.forRoot(), I18nModule],
         declarations: [HeaderComponent],
         providers: [],
+        teardown: { destroyAfterEach: false },
       }).compileComponents();
     })
   );

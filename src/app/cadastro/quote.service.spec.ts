@@ -13,6 +13,7 @@ describe('QuoteService', () => {
     TestBed.configureTestingModule({
       imports: [CoreModule, HttpClientTestingModule],
       providers: [QuoteService],
+      teardown: { destroyAfterEach: false },
     });
 
     quoteService = TestBed.inject(QuoteService);
