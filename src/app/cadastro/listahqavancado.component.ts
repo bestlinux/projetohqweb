@@ -12,11 +12,11 @@ import { ConfirmationDialogService } from '@app/services/confirmation-dialog.ser
 import { ToastService } from '@app/services/toast.service';
 import { Editora } from '@app/@shared/models/editora';
 import { Constants } from '@app/config/constants';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Router } from '@angular/router';
 import { MatSort } from '@angular/material/sort';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
 const log = new Logger('Lista HQ Avancado');

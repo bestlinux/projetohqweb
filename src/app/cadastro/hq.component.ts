@@ -12,7 +12,7 @@ import { ConfirmationDialogService } from '@app/services/confirmation-dialog.ser
 import { ToastService } from '@app/services/toast.service';
 import { Editora } from '@app/@shared/models/editora';
 import { Constants } from '@app/config/constants';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
 import { SelectionModel } from '@angular/cdk/collections';
 
 const log = new Logger('hq');
