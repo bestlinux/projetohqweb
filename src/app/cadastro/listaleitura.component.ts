@@ -8,7 +8,7 @@ import { Logger } from '@core';
 import { Router } from '@angular/router';
 import { ConfirmationDialogService } from '@app/services/confirmation-dialog.service';
 import { ToastService } from '@app/services/toast.service';
-import { FormControl, Validators } from '@angular/forms';
+import { UntypedFormControl, Validators } from '@angular/forms';
 import { formatDate } from '@angular/common';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
@@ -31,7 +31,7 @@ export class ListaLeituraComponent implements OnInit {
   id: any;
   statusLido: any;
   picker: any;
-  startDate = new FormControl(formatDate(new Date(), 'dd/MM/yyyy', 'pt'), Validators.required);
+  startDate = new UntypedFormControl(formatDate(new Date(), 'dd/MM/yyyy', 'pt'), Validators.required);
   currentRegistery: HQ;
 
   constructor(

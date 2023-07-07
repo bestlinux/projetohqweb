@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { DataTablesResponse } from '@shared/classes/data-tables-response';
 import { Logger } from '@core';
 import { ApiHttpService } from '@app/services/api-http.service';
@@ -47,7 +47,7 @@ export class ListaHQAvancadoComponent implements OnInit {
   formMode = 'New';
   sub: any;
   id: any;
-  entryForm: FormGroup;
+  entryForm: UntypedFormGroup;
   error: string | undefined;
   hq: HQ;
   leitura: HQ;
@@ -78,7 +78,7 @@ export class ListaHQAvancadoComponent implements OnInit {
   constructor(
     public toastService: ToastService,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private apiHttpService: ApiHttpService,
     private apiEndpointsService: ApiEndpointsService,
     private confirmationDialogService: ConfirmationDialogService,

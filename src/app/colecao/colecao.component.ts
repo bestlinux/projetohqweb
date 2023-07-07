@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { Logger } from '@core';
 import { ApiHttpService } from '@app/services/api-http.service';
 import { ApiEndpointsService } from '@app/services/api-endpoints.service';
@@ -25,7 +25,7 @@ export class ColecaoComponent implements OnInit {
   formMode = 'New';
   sub: any;
   id: any;
-  entryFormColecao: FormGroup;
+  entryFormColecao: UntypedFormGroup;
   error: string | undefined;
   isAddNew: boolean = false;
   file: any;
@@ -39,7 +39,7 @@ export class ColecaoComponent implements OnInit {
   constructor(
     public toastService: ToastService,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private apiHttpService: ApiHttpService,
     private apiEndpointsService: ApiEndpointsService,
     private confirmationDialogService: ConfirmationDialogService,

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { DataTablesResponse } from '@shared/classes/data-tables-response';
 import { Logger } from '@core';
 import { ApiHttpService } from '@app/services/api-http.service';
@@ -32,7 +32,7 @@ export class HQComponent implements OnInit {
   sub: any;
   id: any;
   titulo: any;
-  entryForm: FormGroup;
+  entryForm: UntypedFormGroup;
   error: string | undefined;
   hq: HQ;
   desejo: HQ;
@@ -64,7 +64,7 @@ export class HQComponent implements OnInit {
   constructor(
     public toastService: ToastService,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private apiHttpService: ApiHttpService,
     private apiEndpointsService: ApiEndpointsService,
     private confirmationDialogService: ConfirmationDialogService,

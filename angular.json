@@ -148,7 +148,6 @@
       }
     }
   },
-  "defaultProject": "projetohq",
   "cli": {
     "analytics": false
   }
