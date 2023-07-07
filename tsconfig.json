@@ -19,7 +19,8 @@
       "@core/*": ["src/app/@core/*"],
       "@shared": ["src/app/@shared"],
       "@shared/*": ["src/app/@shared/*"],
-      "@env/*": ["src/environments/*"]
+      "@env/*": ["src/environments/*"],
+      "@angular/*": ["./node_modules/@angular/*"]
     },
     "useDefineForClassFields": false
   },
