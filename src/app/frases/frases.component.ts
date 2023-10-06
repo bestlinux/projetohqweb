@@ -1,30 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
-<<<<<<< HEAD
 import { Logger } from '../@core';
 import { ApiHttpService } from '..//services/api-http.service';
 import { ApiEndpointsService } from '..//services/api-endpoints.service';
 import { DataResponse } from '../@shared/classes/data-response';
 import { ConfirmationDialogService } from '..//services/confirmation-dialog.service';
-=======
-import { Logger } from '@core';
-import { ApiHttpService } from '@app/services/api-http.service';
-import { ApiEndpointsService } from '@app/services/api-endpoints.service';
-import { DataResponse } from '@shared/classes/data-response';
-import { ConfirmationDialogService } from '@app/services/confirmation-dialog.service';
->>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { ToastService } from '../services/toast.service';
 import { HttpEventType } from '@angular/common/http';
 import { HttpRequest } from '@angular/common/http';
-<<<<<<< HEAD
 import { Frase } from '../@shared/models/frase';
 import { DataTablesResponse } from '../@shared/classes/data-tables-response';
-=======
-import { Frase } from '@shared/models/frase';
-import { DataTablesResponse } from '@shared/classes/data-tables-response';
->>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
 import { Router } from '@angular/router';
 
 const log = new Logger('Frases');
@@ -38,22 +25,13 @@ export class FrasesComponent implements OnInit {
   formMode = 'New';
   sub: any;
   id: any;
-<<<<<<< HEAD
   entryFormFrases!: UntypedFormGroup;
-=======
-  entryFormFrases: UntypedFormGroup;
->>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
   error: string | undefined;
   isAddNew: boolean = false;
   file: any;
   progress: any;
-<<<<<<< HEAD
   //dtOptions: DataTables.Settings = {};
   frases!: Frase[];
-=======
-  dtOptions: DataTables.Settings = {};
-  frases: Frase[];
->>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
   imagem: any;
   isLoadFullImage: boolean = false;
   usuarioLogado: any;
@@ -129,22 +107,11 @@ export class FrasesComponent implements OnInit {
       }
     });
 
-<<<<<<< HEAD
     /*this.dtOptions = {
-=======
-    this.dtOptions = {
->>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
       pagingType: 'full_numbers',
       pageLength: 20,
       serverSide: true,
       processing: true,
-<<<<<<< HEAD
-
-=======
-      /*language: {
-        processing: '<img class="img-loading" src="assets/loading.gif" alt="Angular" loading="lazy"/>',
-      },*/
->>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
       ajax: (dataTablesParameters: any, callback) => {
         // Call WebAPI to get positions
         this.apiHttpService
@@ -178,11 +145,7 @@ export class FrasesComponent implements OnInit {
           data: 'id',
         },
       ],
-<<<<<<< HEAD
     };*/
-=======
-    };
->>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
     log.debug('ngOnInit:', this.id);
   }
 
@@ -191,13 +154,8 @@ export class FrasesComponent implements OnInit {
     const formData = new FormData();
 
     formData.append(this.file.name, this.file);
-<<<<<<< HEAD
     formData.append('NomeHQ', this.entryFormFrases?.get('nomeHQ')?.value);
     formData.append('Autor', this.entryFormFrases?.get('autor')?.value);
-=======
-    formData.append('NomeHQ', this.entryFormFrases.get('nomeHQ').value);
-    formData.append('Autor', this.entryFormFrases.get('autor').value);
->>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
 
     const uploadReq = new HttpRequest('POST', this.apiEndpointsService.postImageUploadEndpoint(), formData, {
       reportProgress: true,

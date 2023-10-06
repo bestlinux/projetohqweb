@@ -3,16 +3,9 @@ import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-<<<<<<< HEAD
 import { SharedModule } from '../@shared';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
-=======
-import { SharedModule } from '@shared';
-import { ReactiveFormsModule } from '@angular/forms';
-import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
-import { DataTablesModule } from 'angular-datatables';
->>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
 import { A11yModule } from '@angular/cdk/a11y';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -67,10 +60,6 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
     ReactiveFormsModule,
     SharedModule,
     RxReactiveFormsModule,
-<<<<<<< HEAD
-=======
-    DataTablesModule,
->>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
     MatSliderModule,
     A11yModule,
     ClipboardModule,
@@ -119,10 +108,6 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
     CommonModule,
     TranslateModule,
     SharedModule,
-<<<<<<< HEAD
-=======
-    DataTablesModule,
->>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
     ReactiveFormsModule,
     RxReactiveFormsModule,
   ],

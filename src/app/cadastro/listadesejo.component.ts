@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-<<<<<<< HEAD
 import { HQ } from '../@shared/models/hq';
 import { ApiHttpService } from '../services/api-http.service';
 import { ApiEndpointsService } from '../services/api-endpoints.service';
@@ -9,16 +8,6 @@ import { Logger } from '../@core';
 import { Router } from '@angular/router';
 import { ConfirmationDialogService } from '../services/confirmation-dialog.service';
 import { ToastService } from '../services/toast.service';
-=======
-import { HQ } from '@shared/models/hq';
-import { ApiHttpService } from '@app/services/api-http.service';
-import { ApiEndpointsService } from '@app/services/api-endpoints.service';
-import { DataTablesResponse } from '@shared/classes/data-tables-response';
-import { Logger } from '@core';
-import { Router } from '@angular/router';
-import { ConfirmationDialogService } from '@app/services/confirmation-dialog.service';
-import { ToastService } from '@app/services/toast.service';
->>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
 
 const log = new Logger('ListaDesejo');
 
@@ -28,19 +17,11 @@ const log = new Logger('ListaDesejo');
   styleUrls: ['./listadesejo.component.scss'],
 })
 export class ListaDesejoComponent implements OnInit {
-<<<<<<< HEAD
   //dtOptions: DataTables.Settings = {};
   hqs: HQ[] = [];
   isLoadFullImage: boolean = false;
   capaFull: any;
   testeModal: 'TEste' = "TEste";
-=======
-  dtOptions: DataTables.Settings = {};
-  hqs: HQ[];
-  isLoadFullImage: boolean = false;
-  capaFull: any;
-  testeModal: 'TEste';
->>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
   usuarioLogado: any;
 
   constructor(
@@ -112,22 +93,12 @@ export class ListaDesejoComponent implements OnInit {
   ngOnInit() {
     this.isLoadFullImage = false;
     this.testeModal = 'TEste';
-<<<<<<< HEAD
 
     /*this.dtOptions = {
-=======
-    this.dtOptions = {
->>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
       pagingType: 'full_numbers',
       pageLength: 20,
       serverSide: true,
       processing: true,
-<<<<<<< HEAD
-=======
-      /*language: {
-        processing: '<img class="img-loading" src="assets/loading.gif" alt="Angular" loading="lazy"/>',
-      },*/
->>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
       ajax: (dataTablesParameters: any, callback) => {
         // Call WebAPI to get positions
         this.apiHttpService
@@ -165,10 +136,6 @@ export class ListaDesejoComponent implements OnInit {
           data: '',
         },
       ],
-<<<<<<< HEAD
     };*/
-=======
-    };
->>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
   }
 }

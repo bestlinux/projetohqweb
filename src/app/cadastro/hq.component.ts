@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-<<<<<<< HEAD
 import { UntypedFormGroup, UntypedFormBuilder, Validators, FormGroup } from '@angular/forms';
 import { DataTablesResponse } from '../@shared/classes/data-tables-response';
 import { Logger } from '../@core';
@@ -13,20 +12,6 @@ import { ConfirmationDialogService } from '../services/confirmation-dialog.servi
 import { ToastService } from '../services/toast.service';
 import { Editora } from '../@shared/models/editora';
 import { Constants } from '../config/constants';
-=======
-import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
-import { DataTablesResponse } from '@shared/classes/data-tables-response';
-import { Logger } from '@core';
-import { ApiHttpService } from '@app/services/api-http.service';
-import { ApiEndpointsService } from '@app/services/api-endpoints.service';
-import { HQ } from '@shared/models/hq';
-import { DataResponseHQ } from '@shared/classes/data-response-hq';
-import { DataResponseEditora } from '@shared/classes/data-response-editora';
-import { ConfirmationDialogService } from '@app/services/confirmation-dialog.service';
-import { ToastService } from '@app/services/toast.service';
-import { Editora } from '@app/@shared/models/editora';
-import { Constants } from '@app/config/constants';
->>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
 import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
 import { SelectionModel } from '@angular/cdk/collections';
 
@@ -47,19 +32,11 @@ export class HQComponent implements OnInit {
   sub: any;
   id: any;
   titulo: any;
-<<<<<<< HEAD
   entryForm!: FormGroup;
   error!: string;
   hq!: HQ;
   desejo!: HQ;
   editora!: Editora;
-=======
-  entryForm: UntypedFormGroup;
-  error: string | undefined;
-  hq: HQ;
-  desejo: HQ;
-  editora: Editora;
->>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
   isAddNew: boolean = false;
   readyToCreate: boolean = false;
   selectedEditora: any;
@@ -78,11 +55,7 @@ export class HQComponent implements OnInit {
   isLoadingCreate = false;
   isLoadingDesejo = false;
   spinner: any;
-<<<<<<< HEAD
   capa: string | undefined;
-=======
-  capa: string;
->>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
   voltarHqAvancado: boolean = false;
   voltarHqLeitura: boolean = false;
   rotaBotaoVoltar: any;

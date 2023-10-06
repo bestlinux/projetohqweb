@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-<<<<<<< HEAD
 import { UntypedFormGroup, UntypedFormBuilder, Validators, FormGroup } from '@angular/forms';
 import { DataTablesResponse } from '../@shared/classes/data-tables-response';
 import { Logger } from '../@core';
@@ -13,20 +12,6 @@ import { ConfirmationDialogService } from '../services/confirmation-dialog.servi
 import { ToastService } from '../services/toast.service';
 import { Editora } from '../@shared/models/editora';
 import { Constants } from '../config/constants';
-=======
-import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
-import { DataTablesResponse } from '@shared/classes/data-tables-response';
-import { Logger } from '@core';
-import { ApiHttpService } from '@app/services/api-http.service';
-import { ApiEndpointsService } from '@app/services/api-endpoints.service';
-import { HQ } from '@shared/models/hq';
-import { DataResponseHQ } from '@shared/classes/data-response-hq';
-import { DataResponseEditora } from '@shared/classes/data-response-editora';
-import { ConfirmationDialogService } from '@app/services/confirmation-dialog.service';
-import { ToastService } from '@app/services/toast.service';
-import { Editora } from '@app/@shared/models/editora';
-import { Constants } from '@app/config/constants';
->>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
 import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Router } from '@angular/router';
@@ -51,7 +36,6 @@ const log = new Logger('Lista HQ Avancado');
 export class ListaHQAvancadoComponent implements OnInit {
   displayedColumns: string[] = ['titulo', 'created', 'linkDetalhes', 'acoes'];
   dataSource = new MatTableDataSource<HQ>();
-<<<<<<< HEAD
   expandedElement: HQ | null | undefined;
 
   @ViewChild(MatSort)
@@ -70,24 +54,6 @@ export class ListaHQAvancadoComponent implements OnInit {
   hq: HQ | undefined;
   leitura: HQ | undefined;
   editora: Editora | undefined;
-=======
-  expandedElement: HQ | null;
-
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-
-  selection = new SelectionModel<HQ>(true, []);
-  hqs: HQ[];
-  hqsSelected: HQ[];
-  formMode = 'New';
-  sub: any;
-  id: any;
-  entryForm: UntypedFormGroup;
-  error: string | undefined;
-  hq: HQ;
-  leitura: HQ;
-  editora: Editora;
->>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
   isAddNew: boolean = false;
   readyToCreate: boolean = false;
   selectedEditora: any;
@@ -106,11 +72,7 @@ export class ListaHQAvancadoComponent implements OnInit {
   isLoadingCreate = false;
   isLoadingLeitura = false;
   spinner: any;
-<<<<<<< HEAD
   capa: string | undefined;
-=======
-  capa: string;
->>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
   usuarioLogado: any;
   isLoadFullImage: boolean = false;
   capaFull: any;
@@ -225,21 +187,13 @@ export class ListaHQAvancadoComponent implements OnInit {
   // Handle Create button click
   load(valor: any) {
     log.debug('OnInsert: ', valor);
-<<<<<<< HEAD
     log.debug('OnInsert: ', this.entryForm?.get('titulo')?.value);
-=======
-    log.debug('OnInsert: ', this.entryForm.get('titulo').value);
->>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
   }
 
   // Handle Create button click
   loading(valor: any) {
     log.debug('OnInsert: ', valor);
-<<<<<<< HEAD
     log.debug('OnInsert: ', this.entryForm?.get('titulo')?.value);
-=======
-    log.debug('OnInsert: ', this.entryForm.get('titulo').value);
->>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
   }
 
   // Handle Create button click
@@ -249,19 +203,11 @@ export class ListaHQAvancadoComponent implements OnInit {
     this.readyToCreate = true;
     this.isLoading = true;
     this.advancedSearch(
-<<<<<<< HEAD
       this.entryForm?.get('titulo')?.value,
       this.entryForm?.get('anoLancamento')?.value,
       this.entryForm?.get('numeroEdicao')?.value,
       this.entryForm?.get('roteiro')?.value,
       this.entryForm?.get('personagens')?.value,
-=======
-      this.entryForm.get('titulo').value,
-      this.entryForm.get('anoLancamento').value,
-      this.entryForm.get('numeroEdicao').value,
-      this.entryForm.get('roteiro').value,
-      this.entryForm.get('personagens').value,
->>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
       this.selectedEditora,
       this.selectedCategoria,
       this.selectedGenero,

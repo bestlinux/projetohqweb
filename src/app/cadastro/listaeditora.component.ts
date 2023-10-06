@@ -1,18 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-<<<<<<< HEAD
 import { Editora } from '../@shared/models/editora';
 import { ApiHttpService } from '../services/api-http.service';
 import { ApiEndpointsService } from '../services/api-endpoints.service';
 import { DataTablesResponse } from '../@shared/classes/data-tables-response';
 import { Logger } from '../@core';
-=======
-import { Editora } from '@shared/models/editora';
-import { ApiHttpService } from '@app/services/api-http.service';
-import { ApiEndpointsService } from '@app/services/api-endpoints.service';
-import { DataTablesResponse } from '@shared/classes/data-tables-response';
-import { Logger } from '@core';
->>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
 import { Router } from '@angular/router';
 
 const log = new Logger('ListaEditora');
@@ -23,13 +15,8 @@ const log = new Logger('ListaEditora');
   styleUrls: ['./listaeditora.component.scss'],
 })
 export class ListaEditoraComponent implements OnInit {
-<<<<<<< HEAD
   //dtOptions: DataTables.Settings = {};
   editoras: Editora[] = [];
-=======
-  dtOptions: DataTables.Settings = {};
-  editoras: Editora[];
->>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
   usuarioLogado: any;
 
   constructor(

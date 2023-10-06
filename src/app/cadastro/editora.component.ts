@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
-<<<<<<< HEAD
 import { Logger } from '../@core';
 import { ApiHttpService } from '../services/api-http.service';
 import { ApiEndpointsService } from '../services/api-endpoints.service';
@@ -9,15 +8,6 @@ import { Editora } from '../@shared/models/editora';
 import { DataResponseEditora } from '../@shared/classes/data-response-editora';
 import { DataResponse } from '../@shared/classes/data-response';
 import { ConfirmationDialogService } from '../services/confirmation-dialog.service';
-=======
-import { Logger } from '@core';
-import { ApiHttpService } from '@app/services/api-http.service';
-import { ApiEndpointsService } from '@app/services/api-endpoints.service';
-import { Editora } from '@shared/models/editora';
-import { DataResponseEditora } from '@shared/classes/data-response-editora';
-import { DataResponse } from '@shared/classes/data-response';
-import { ConfirmationDialogService } from '@app/services/confirmation-dialog.service';
->>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { ToastService } from '../services/toast.service';
 import { Router } from '@angular/router';
@@ -33,11 +23,7 @@ export class EditoraComponent implements OnInit {
   formMode = 'New';
   sub: any;
   id: any;
-<<<<<<< HEAD
   entryFormEditora!: UntypedFormGroup;
-=======
-  entryFormEditora: UntypedFormGroup;
->>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
   error: string | undefined;
   editora!: Editora;
   isAddNew: boolean = false;

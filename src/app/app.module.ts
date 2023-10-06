@@ -6,15 +6,9 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
-<<<<<<< HEAD
 import { environment } from '../environments/environment';
 import { CoreModule } from '../app/@core';
 import { SharedModule } from '../app/@shared';
-=======
-import { environment } from '@env/environment';
-import { CoreModule } from '@core';
-import { SharedModule } from '@shared';
->>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
 //import { MasterModule } from './master/master.module';
 import { ShellModule } from './shell/shell.module';
 //import { EditoraModule } from './cadastro/editora.module';
@@ -48,10 +42,6 @@ registerLocaleData(localeBr, 'pt');
     ShellModule,
     LoginModule,
     HomeModule,
-<<<<<<< HEAD
-=======
-    ListaEditoraModule,
->>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
     AppRoutingModule, // must be imported as the last module as it contains the fallback route
     MatSliderModule
   ],
