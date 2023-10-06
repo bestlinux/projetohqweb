@@ -7,7 +7,11 @@ import { Router, NavigationEnd, ActivatedRoute, NavigationStart } from '@angular
   styleUrls: ['./shell.component.scss'],
 })
 export class ShellComponent implements OnInit {
+<<<<<<< HEAD
   mostrarCabecalho: boolean = false;
+=======
+  mostrarCabecalho: boolean;
+>>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
   existeUsuario: any;
 
   constructor(private router: Router) {

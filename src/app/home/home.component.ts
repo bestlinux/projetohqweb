@@ -1,11 +1,20 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
+<<<<<<< HEAD
 import { ApiHttpService } from '../services/api-http.service';
 import { ApiEndpointsService } from '../services/api-endpoints.service';
 import { Logger } from '../@core';
 import { HQ } from '../@shared/models/hq';
 import { DataTablesResponse } from '../@shared/classes/data-tables-response';
 import { Frase } from '../@shared/models/frase';
+=======
+import { ApiHttpService } from '@app/services/api-http.service';
+import { ApiEndpointsService } from '@app/services/api-endpoints.service';
+import { Logger } from '@core';
+import { HQ } from '@shared/models/hq';
+import { DataTablesResponse } from '@shared/classes/data-tables-response';
+import { Frase } from '@shared/models/frase';
+>>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
 import { Router } from '@angular/router';
 
 const log = new Logger('Home');
@@ -16,6 +25,7 @@ const log = new Logger('Home');
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+<<<<<<< HEAD
   hqs: HQ[] = [];
   frases: Frase[] = [];
 
@@ -52,6 +62,44 @@ export class HomeComponent implements OnInit {
   tituloFraseHQ!: string;
   arquivoFrase!: string;
   totalHqs!: number;
+=======
+  hqs: HQ[];
+  frases: Frase[];
+
+  frase1: Frase;
+
+  hqCard1: HQ;
+  hqCard2: HQ;
+  hqCard3: HQ;
+  hqCard4: HQ;
+  hqCard5: HQ;
+  dataTablesParameters: any;
+  tituloCard1: string;
+  tituloCard2: string;
+  tituloCard3: string;
+  tituloCard4: string;
+  tituloCard5: string;
+  publicacaoCard1: string;
+  publicacaoCard2: string;
+  publicacaoCard3: string;
+  publicacaoCard4: string;
+  publicacaoCard5: string;
+  capa1: string;
+  capa2: string;
+  capa3: string;
+  capa4: string;
+  capa5: string;
+  idHq1: string;
+  idHq2: string;
+  idHq3: string;
+  idHq4: string;
+  idHq5: string;
+
+  autorFrase: string;
+  tituloFraseHQ: string;
+  arquivoFrase: string;
+  totalHqs: number;
+>>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
 
   usuarioLogado: any;
 

@@ -11,16 +11,38 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,
+<<<<<<< HEAD
     "downlevelIteration": true,
+=======
+    "module": "es2020",
+    "moduleResolution": "node",
+>>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
+<<<<<<< HEAD
     "target": "es2022",
     "module": "es2020",
     "lib": [
       "es2018",
       "dom"
     ],
+=======
+    "noImplicitAny": true,
+    "target": "ES2022",
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2018", "dom"],
+    "baseUrl": "./",
+    "paths": {
+      "@app/*": ["src/app/*"],
+      "@core": ["src/app/@core"],
+      "@core/*": ["src/app/@core/*"],
+      "@shared": ["src/app/@shared"],
+      "@shared/*": ["src/app/@shared/*"],
+      "@env/*": ["src/environments/*"],
+      "@angular/*": ["./node_modules/@angular/*"]
+    },
+>>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
     "useDefineForClassFields": false
   },
   "angularCompilerOptions": {

@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+<<<<<<< HEAD
 import { Shell } from '../app/shell/shell.service';
+=======
+import { Shell } from '@app/shell/shell.service';
+>>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
 import { LoginComponent } from './login/login.component';
 import { ExitComponent } from './login/exit.component';
 

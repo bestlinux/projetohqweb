@@ -2,7 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 
+<<<<<<< HEAD
 import { SharedModule } from '../@shared';
+=======
+import { SharedModule } from '@shared';
+>>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
 
 import { ListaHQAvancadoRoutingModule } from './listahqavancado-routing.module';
 import { ListaHQAvancadoComponent } from './listahqavancado.component';
@@ -10,7 +14,11 @@ import { ListaHQAvancadoComponent } from './listahqavancado.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 
+<<<<<<< HEAD
 //import { DataTablesModule } from 'angular-datatables';
+=======
+import { DataTablesModule } from 'angular-datatables';
+>>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
 
 import { A11yModule } from '@angular/cdk/a11y';
 import { ClipboardModule } from '@angular/cdk/clipboard';
@@ -70,7 +78,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     SharedModule,
     RxReactiveFormsModule,
+<<<<<<< HEAD
     //DataTablesModule,
+=======
+    DataTablesModule,
+>>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
     MatSliderModule,
     A11yModule,
     ClipboardModule,

@@ -52,7 +52,11 @@
     <div class="card-body">
       <div class="table-responsive-sm">
         <!-- Angular Datatables server side paging -->
+<<<<<<< HEAD
        <!--<table datatable [dtOptions]="dtOptions" class="row-border hover">
+=======
+        <table datatable [dtOptions]="dtOptions" class="row-border hover">
+>>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
           <thead>
             <tr>
               <th>Titulo</th>
@@ -68,13 +72,21 @@
           <tbody *ngIf="hqs?.length != 0">
             <tr *ngFor="let hq of hqs">
               <td>
+<<<<<<< HEAD
                  Hyperlink position number with routerLink and position Id parameter
+=======
+                <!-- Hyperlink position number with routerLink and position Id parameter -->
+>>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
                 <a [routerLink]="['/hq', hq.id, 'Leitura']">{{ hq.titulo }}</a>
               </td>
               <th *ngIf="hq.lido === 0">Não</th>
               <th *ngIf="hq.lido === 1">Sim</th>
               <td>
+<<<<<<< HEAD
                  Hyperlink position number with routerLink and position Id parameter 
+=======
+                <!-- Hyperlink position number with routerLink and position Id parameter -->
+>>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
                 {{ hq.dataLeitura | date: 'dd/MM/yyyy' }}
               </td>
               <td><img class="img-responsive" src="http://127.0.0.1:8887/Capas/{{ hq.capa }}" alt="Angular" /></td>
@@ -117,7 +129,11 @@
               <td colspan="3" class="no-data-available">Não foram encontrados dados!</td>
             </tr>
           </tbody>
+<<<<<<< HEAD
         </table> -->
+=======
+        </table>
+>>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
       </div>
     </div>
     <div class="card-footer">*Campos de busca são Titulo</div>

@@ -2,10 +2,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 
+<<<<<<< HEAD
 import { SharedModule } from '../@shared';
 import { ListaLeituraRoutingModule } from './listaleitura-routing.module';
 import { ListaLeituraComponent } from './listaleitura.component';
 //import { DataTablesModule } from 'angular-datatables';
+=======
+import { SharedModule } from '@shared';
+import { ListaLeituraRoutingModule } from './listaleitura-routing.module';
+import { ListaLeituraComponent } from './listaleitura.component';
+import { DataTablesModule } from 'angular-datatables';
+>>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
 import { FormsModule } from '@angular/forms';
 
 import { ReactiveFormsModule } from '@angular/forms';
@@ -61,7 +68,11 @@ import { OverlayModule } from '@angular/cdk/overlay';
     TranslateModule,
     SharedModule,
     ListaLeituraRoutingModule,
+<<<<<<< HEAD
     //DataTablesModule,
+=======
+    DataTablesModule,
+>>>>>>> 01cf51104e28bd9d657bcc309e2ef41802fda682
     FormsModule,
     ReactiveFormsModule,
     RxReactiveFormsModule,
