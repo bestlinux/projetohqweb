@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { HQ } from '@shared/models/hq';
-import { ApiHttpService } from '@app/services/api-http.service';
-import { ApiEndpointsService } from '@app/services/api-endpoints.service';
-import { DataTablesResponse } from '@shared/classes/data-tables-response';
-import { Logger } from '@core';
+import { HQ } from '../@shared/models/hq';
+import { ApiHttpService } from '../services/api-http.service';
+import { ApiEndpointsService } from '../services/api-endpoints.service';
+import { DataTablesResponse } from '../@shared/classes/data-tables-response';
+import { Logger } from '../@core';
+import { Router } from '@angular/router';
 
 const log = new Logger('ListaHQ');
 
@@ -14,31 +15,40 @@ const log = new Logger('ListaHQ');
   styleUrls: ['./listahq.component.scss'],
 })
 export class ListaHQComponent implements OnInit {
-  dtOptions: DataTables.Settings = {};
-  hqs: HQ[];
+  //dtOptions: DataTables.Settings = {};
+  hqs: HQ[] = [];
   isLoadFullImage: boolean = false;
   capaFull: any;
-  testeModal: 'TEste';
+  testeModal: 'TEste' = "TEste";
+  usuarioLogado: any;
 
-  constructor(private apiHttpService: ApiHttpService, private apiEndpointsService: ApiEndpointsService) {}
+  constructor(
+    private apiHttpService: ApiHttpService,
+    private apiEndpointsService: ApiEndpointsService,
+    private router: Router
+  ) {
+    this.usuarioLogado = localStorage.getItem('logado');
+    //console.log('curent status is ' + this.usuarioLogado);
+    if (this.usuarioLogado === 'false') {
+      this.router.navigateByUrl('/login');
+    }
+  }
 
   exibeImagemFull(capa: any) {
     this.isLoadFullImage = true;
     this.capaFull = capa;
-    console.log(capa);
+    //console.log(capa);
   }
 
   ngOnInit() {
     this.isLoadFullImage = false;
     this.testeModal = 'TEste';
-    this.dtOptions = {
+
+    /*this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 20,
       serverSide: true,
       processing: true,
-      /*language: {
-        processing: '<img class="img-loading" src="assets/loading.gif" alt="Angular" loading="lazy"/>',
-      },*/
       ajax: (dataTablesParameters: any, callback) => {
         // Call WebAPI to get positions
         this.apiHttpService
@@ -84,6 +94,6 @@ export class ListaHQComponent implements OnInit {
           data: 'capa',
         },
       ],
-    };
+    };*/
   }
 }

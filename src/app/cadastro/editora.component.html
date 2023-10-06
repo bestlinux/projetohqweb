@@ -3,7 +3,7 @@
   <form [formGroup]="entryFormEditora" novalidate>
     <div class="card">
       <div class="card-header">
-        <div class="float-left"><h3 class="text-info">Adicionar Editora</h3></div>
+        <div class="float-left"><h3 class="text-info">Editora</h3></div>
         <div class="float-right">
           <!-- HTML markup for form mode New or Edit -->
           <h5 class="text-warning font-italic">{{ formMode }}</h5>
@@ -63,7 +63,7 @@
             [disabled]="entryFormEditora.invalid || !isAddNew"
             *ngIf="this.isAddNew"
           >
-            <span translate><i class="fas fa-plus"></i> Create</span>
+            <span translate><i class="fas fa-plus"></i> Adicionar</span>
           </button>
 
           <button
@@ -73,7 +73,7 @@
             [disabled]="entryFormEditora.invalid || isAddNew"
             *ngIf="!this.isAddNew"
           >
-            <span translate><i class="fas fa-trash-alt"></i> Delete</span>
+            <span translate><i class="fas fa-trash-alt"></i> Excluir</span>
           </button>
         </div>
       </div>

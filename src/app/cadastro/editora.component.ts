@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Logger } from '@core';
-import { ApiHttpService } from '@app/services/api-http.service';
-import { ApiEndpointsService } from '@app/services/api-endpoints.service';
-import { Editora } from '@shared/models/editora';
-import { DataResponseEditora } from '@shared/classes/data-response-editora';
-import { DataResponse } from '@shared/classes/data-response';
-import { ConfirmationDialogService } from '@app/services/confirmation-dialog.service';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
+import { Logger } from '../@core';
+import { ApiHttpService } from '../services/api-http.service';
+import { ApiEndpointsService } from '../services/api-endpoints.service';
+import { Editora } from '../@shared/models/editora';
+import { DataResponseEditora } from '../@shared/classes/data-response-editora';
+import { DataResponse } from '../@shared/classes/data-response';
+import { ConfirmationDialogService } from '../services/confirmation-dialog.service';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
-import { ToastService } from '@app/services/toast.service';
+import { ToastService } from '../services/toast.service';
 import { Router } from '@angular/router';
 
 const log = new Logger('Editora');
@@ -23,21 +23,28 @@ export class EditoraComponent implements OnInit {
   formMode = 'New';
   sub: any;
   id: any;
-  entryFormEditora: FormGroup;
+  entryFormEditora!: UntypedFormGroup;
   error: string | undefined;
-  editora: Editora;
+  editora!: Editora;
   isAddNew: boolean = false;
   existeEditoraNaHQ: any;
+  usuarioLogado: any;
 
   constructor(
     public toastService: ToastService,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private apiHttpService: ApiHttpService,
     private apiEndpointsService: ApiEndpointsService,
     private confirmationDialogService: ConfirmationDialogService,
     private router: Router
   ) {
+    this.usuarioLogado = localStorage.getItem('logado');
+
+    if (this.usuarioLogado === 'false') {
+      this.router.navigateByUrl('/login');
+    }
+
     this.createForm();
   }
 
@@ -63,7 +70,10 @@ export class EditoraComponent implements OnInit {
 
   // Handle Delete button click
   onDelee() {
-    this.validaExistenciaEditora(this.entryFormEditora.get('nome').value);
+    if (this.entryFormEditora != null)
+    {
+        this.validaExistenciaEditora(this.entryFormEditora.get('nome')?.value);
+    }
   }
 
   validaExistenciaEditora(nome: any): void {
@@ -78,7 +88,7 @@ export class EditoraComponent implements OnInit {
             .confirm('Editora', 'Tem certeza que deseja excluir ?')
             .then((confirmed) => {
               if (confirmed) {
-                this.delete(this.entryFormEditora.get('id').value);
+                this.delete(this.entryFormEditora.get('id')?.value);
                 log.debug('onDelee: ', this.entryFormEditora.value);
                 this.router.navigateByUrl('/listaeditora');
               }
@@ -118,10 +128,8 @@ export class EditoraComponent implements OnInit {
   delete(id: any): void {
     this.apiHttpService.delete(this.apiEndpointsService.deleteEditoraByIdEndpoint(id), id).subscribe(
       (resp: any) => {
-        log.debug(resp);
         this.showSuccess('Sucesso!', 'Editora excluida');
-        this.entryFormEditora.reset();
-        this.isAddNew = true;
+        this.router.navigateByUrl('/listaeditora');
       },
       (error) => {
         log.debug(error);
@@ -135,6 +143,7 @@ export class EditoraComponent implements OnInit {
       this.id = resp.data; //guid return in data
       if (resp.succeeded) {
         this.showSuccess('Sucesso!', 'Editora cadastrada');
+        this.router.navigateByUrl('/listaeditora');
       } else {
         this.showError('Erro!', resp.message);
       }

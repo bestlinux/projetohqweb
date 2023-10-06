@@ -1,4 +1,4 @@
-import { HQ } from '@shared/models/hq';
+import { HQ } from '../../@shared/models/hq';
 
 export interface DataResponseHQ {
   succeeded: boolean;

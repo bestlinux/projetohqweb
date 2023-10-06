@@ -5,9 +5,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { merge } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
 
-import { environment } from '@env/environment';
-import { Logger, UntilDestroy, untilDestroyed } from '@core';
-import { I18nService } from '@app/i18n';
+import { environment } from '../environments/environment';
+import { Logger, UntilDestroy, untilDestroyed } from '../app/@core';
+import { I18nService } from '../app/i18n';
 
 const log = new Logger('App');
 
@@ -32,7 +32,7 @@ export class AppComponent implements OnInit, OnDestroy {
       Logger.enableProductionMode();
     }
 
-    log.debug('init');
+    //log.debug('init');
 
     // Setup translations
     this.i18nService.init(environment.defaultLanguage, environment.supportedLanguages);

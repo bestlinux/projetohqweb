@@ -1,20 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { DataTablesResponse } from '@shared/classes/data-tables-response';
-import { Logger } from '@core';
-import { ApiHttpService } from '@app/services/api-http.service';
-import { ApiEndpointsService } from '@app/services/api-endpoints.service';
-import { HQ } from '@shared/models/hq';
-import { DataResponseHQ } from '@shared/classes/data-response-hq';
-import { DataResponseEditora } from '@shared/classes/data-response-editora';
-import { ConfirmationDialogService } from '@app/services/confirmation-dialog.service';
-import { ToastService } from '@app/services/toast.service';
-import { Editora } from '@app/@shared/models/editora';
-import { Constants } from '@app/config/constants';
-import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UntypedFormGroup, UntypedFormBuilder, Validators, FormGroup } from '@angular/forms';
+import { DataTablesResponse } from '../@shared/classes/data-tables-response';
+import { Logger } from '../@core';
+import { ApiHttpService } from '../services/api-http.service';
+import { ApiEndpointsService } from '../services/api-endpoints.service';
+import { HQ } from '../@shared/models/hq';
+import { DataResponseHQ } from '../@shared/classes/data-response-hq';
+import { DataResponseEditora } from '../@shared/classes/data-response-editora';
+import { ConfirmationDialogService } from '../services/confirmation-dialog.service';
+import { ToastService } from '../services/toast.service';
+import { Editora } from '../@shared/models/editora';
+import { Constants } from '../config/constants';
+import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
 import { SelectionModel } from '@angular/cdk/collections';
-//import { Directive, ElementRef } from '@angular/core';
 
 const log = new Logger('hq');
 
@@ -24,18 +23,20 @@ const log = new Logger('hq');
   styleUrls: ['./hq.component.scss'],
 })
 export class HQComponent implements OnInit {
-  displayedColumns: string[] = ['select', 'titulo', 'linkDetalhes'];
+  displayedColumns: string[] = ['select', 'titulo', 'linkDetalhes', 'desejo'];
   dataSource = new MatTableDataSource<HQ>();
   selection = new SelectionModel<HQ>(true, []);
-  hqs: HQ[];
-  hqsSelected: HQ[];
+  hqs: HQ[] = [];
+  hqsSelected: HQ[] = [];
   formMode = 'New';
   sub: any;
   id: any;
-  entryForm: FormGroup;
-  error: string | undefined;
-  hq: HQ;
-  editora: Editora;
+  titulo: any;
+  entryForm!: FormGroup;
+  error!: string;
+  hq!: HQ;
+  desejo!: HQ;
+  editora!: Editora;
   isAddNew: boolean = false;
   readyToCreate: boolean = false;
   selectedEditora: any;
@@ -52,23 +53,29 @@ export class HQComponent implements OnInit {
   lidos: any;
   isLoading = true;
   isLoadingCreate = false;
+  isLoadingDesejo = false;
   spinner: any;
+  capa: string | undefined;
+  voltarHqAvancado: boolean = false;
+  voltarHqLeitura: boolean = false;
+  rotaBotaoVoltar: any;
+  usuarioLogado: any;
 
   constructor(
     public toastService: ToastService,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private apiHttpService: ApiHttpService,
     private apiEndpointsService: ApiEndpointsService,
     private confirmationDialogService: ConfirmationDialogService,
-    private constants: Constants
-  ) //{ nativeElement }: ElementRef<HTMLImageElement>
-  {
-    //const supports = 'loading' in HTMLImageElement.prototype;
+    private constants: Constants,
+    private router: Router
+  ) {
+    this.usuarioLogado = localStorage.getItem('logado');
 
-    /*if (supports) {
-      nativeElement.setAttribute('loading', 'lazy');
-    }*/
+    if (this.usuarioLogado === 'false') {
+      this.router.navigateByUrl('/login');
+    }
 
     this.createForm();
   }
@@ -99,38 +106,66 @@ export class HQComponent implements OnInit {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.linkDetalhes + 1}`;
   }
 
+  desejoCreate(desejo: HQ) {
+    this.isLoadingDesejo = true;
+    this.desejo = desejo;
+    this.createDesejo(this.desejo);
+  }
+
   consoleLogEditora(nomeEditora: any) {
     this.selectedEditora = nomeEditora;
-    console.log('curent editora is ' + this.selectedEditora);
+    //console.log('curent editora is ' + this.selectedEditora);
   }
 
   consoleLogCategoria(newValue: any) {
-    console.log('curent categoria is ' + this.selectedCategoria);
+    //console.log('curent categoria is ' + this.selectedCategoria);
   }
 
   consoleLogGenero(valor: any) {
-    console.log('curent genero is ' + this.selectedGenero);
+    //console.log('curent genero is ' + this.selectedGenero);
   }
 
   consoleLogStatus(valor1: any) {
-    console.log('curent status is ' + this.selectedStatus);
+    //console.log('curent status is ' + this.selectedStatus);
   }
 
   consoleLogFormato(valor1: any) {
-    console.log('curent formato is ' + this.selectedFormato);
+    //console.log('curent formato is ' + this.selectedFormato);
   }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe((params) => {
       this.id = params['id'];
+      this.rotaBotaoVoltar = params['rota'];
+
+      console.log(this.rotaBotaoVoltar);
+
+      //VOLTA PARA A TELA DE LISTA DE HQS
       if (this.id !== undefined) {
         this.read(this.route.snapshot.paramMap.get('id'));
         this.formMode = 'Edit';
+        this.voltarHqAvancado = false;
+        this.voltarHqLeitura = false;
       } else {
         this.isAddNew = true;
         this.formMode = 'New';
       }
+
+      //VOLTA PARA A TELA DE BUSCA AVANCADA
+      if (this.rotaBotaoVoltar !== undefined) {
+        if (this.rotaBotaoVoltar === 'Leitura') {
+          this.read(this.route.snapshot.paramMap.get('id'));
+          this.formMode = 'Edit';
+          this.voltarHqLeitura = true;
+        }
+        if (this.rotaBotaoVoltar === 'BuscaAvancada') {
+          this.read(this.route.snapshot.paramMap.get('id'));
+          this.formMode = 'Edit';
+          this.voltarHqAvancado = true;
+        }
+      }
     });
+
     this.loadEditora();
     this.loadGenero();
     this.loadCategoria();
@@ -141,7 +176,7 @@ export class HQComponent implements OnInit {
     //this.categorias = this.constants.categorias;
     this.readyToCreate = false;
     this.spinner = false;
-    log.debug('ngOnInit:', this.id);
+    //log.debug('ngOnInit:', this.id);
   }
 
   loadLido(): void {
@@ -180,13 +215,13 @@ export class HQComponent implements OnInit {
   // Handle Create button click
   load(valor: any) {
     log.debug('OnInsert: ', valor);
-    log.debug('OnInsert: ', this.entryForm.get('titulo').value);
+    log.debug('OnInsert: ', this.entryForm.get('titulo')?.value);
   }
 
   // Handle Create button click
   loading(valor: any) {
     log.debug('OnInsert: ', valor);
-    log.debug('OnInsert: ', this.entryForm.get('titulo').value);
+    log.debug('OnInsert: ', this.entryForm.get('titulo')?.value);
   }
 
   // Handle Create button click
@@ -201,33 +236,31 @@ export class HQComponent implements OnInit {
     this.readyToCreate = true;
     this.isLoading = true;
     this.searchInWeb(
-      this.entryForm.get('titulo').value,
-      this.entryForm.get('anoLancamento').value,
-      this.entryForm.get('numeroEdicao').value,
+      this.entryForm.get('titulo')?.value,
+      this.entryForm.get('anoLancamento')?.value,
+      this.entryForm.get('numeroEdicao')?.value,
       this.selectedEditora,
       this.selectedCategoria,
       this.selectedGenero,
       this.selectedStatus,
       this.selectedFormato
     );
-
-    log.debug('OnSearch: ', this.entryForm.value);
-    log.debug('OnSearch: ', this.entryForm.get('titulo').value);
   }
 
   // Handle Update button click
   onUpdate() {
-    this.put(this.entryForm.get('id').value, this.entryForm.value);
+    this.put(this.entryForm.get('id')?.value, this.entryForm.value);
     this.showSuccess('Sucesso!', 'HQ atualizada');
+    this.router.navigateByUrl('/listahq');
   }
 
   // Handle Delete button click
   onDelete() {
     this.confirmationDialogService
-      .confirm('HQ deletion', 'Are you sure you want to delete?')
+      .confirm('Excluir HQ', 'Tem certeza que deseja excluir ?')
       .then((confirmed) => {
         if (confirmed) {
-          this.delete(this.entryForm.get('id').value);
+          this.delete(this.entryForm.get('id')?.value);
           log.debug('onDelete: ', this.entryForm.value);
         }
       })
@@ -262,10 +295,6 @@ export class HQComponent implements OnInit {
 
     if (numeroEdicao == '' || numeroEdicao == null) numeroEdicao = 0;
 
-    console.log(genero);
-    console.log(categoria);
-    console.log(this.selectedGenero);
-
     this.apiHttpService
       .get(
         this.apiEndpointsService.getHQInWebEndpoint(
@@ -284,7 +313,7 @@ export class HQComponent implements OnInit {
         (resp: DataTablesResponse) => {
           this.hqs = resp.data;
           this.isLoading = false;
-          console.log(this.hqs);
+          //console.log(this.hqs);
           this.dataSource = new MatTableDataSource(this.hqs);
         },
         (error) => (this.isLoading = false)
@@ -298,6 +327,7 @@ export class HQComponent implements OnInit {
       (resp: DataResponseHQ) => {
         //Assign data to class-level model object.
         this.hq = resp.data;
+        this.capa = this.hq.capa;
         //Populate reactive form controls with model object properties.
         this.entryForm.setValue({
           id: this.hq.id,
@@ -310,6 +340,12 @@ export class HQComponent implements OnInit {
           status: this.hq.status,
           formato: this.hq.formato,
           lido: this.hq.lido,
+          licenciador: this.hq.licenciador,
+          numeroPaginas: this.hq.numeroPaginas,
+          preco: this.hq.preco,
+          dtPublicacao: this.hq.dataPublicacao,
+          personagens: this.hq.personagens,
+          roteiro: this.hq.desenhosRoteirosArteFinalCores,
           //genero: this.generos
         });
       },
@@ -323,10 +359,8 @@ export class HQComponent implements OnInit {
   delete(id: any): void {
     this.apiHttpService.delete(this.apiEndpointsService.deleteHQByIdEndpoint(id), id).subscribe(
       (resp: any) => {
-        log.debug(resp);
-        this.showSuccess('Great job!', 'Data is deleted');
-        this.entryForm.reset();
-        this.isAddNew = true;
+        this.showSuccess('Sucesso!', 'HQ excluida');
+        this.router.navigateByUrl('/listahq');
       },
       (error) => {
         log.debug(error);
@@ -341,9 +375,28 @@ export class HQComponent implements OnInit {
       if (resp.succeeded) {
         this.isLoadingCreate = false;
         this.showSuccess('Sucesso!', 'HQ(s) cadastrada(s)');
+        //this.entryForm.reset();
+        //this.selection.clear();
       } else {
         this.showError('Erro!', resp.message);
         this.isLoadingCreate = false;
+      }
+      //this.entryForm.reset();
+    });
+  }
+
+  // CRUD > Create, map to REST/HTTP POST
+  createDesejo(data: any): void {
+    this.apiHttpService.post(this.apiEndpointsService.postDesejoEndpoint(), data).subscribe((resp: DataResponseHQ) => {
+      this.hq = resp.data; //guid return in data
+      if (resp.succeeded) {
+        this.isLoadingDesejo = false;
+        this.showSuccess('Sucesso!', 'HQ cadastrada na lista de desejo');
+        //this.entryForm.reset();
+        //this.selection.clear();
+      } else {
+        this.showError('Erro!', resp.message);
+        this.isLoadingDesejo = false;
       }
       //this.entryForm.reset();
     });
@@ -369,6 +422,12 @@ export class HQComponent implements OnInit {
       status: [''],
       formato: [''],
       lido: [''],
+      licenciador: [''],
+      numeroPaginas: [''],
+      preco: [''],
+      dtPublicacao: [''],
+      personagens: [''],
+      roteiro: [''],
     });
   }
   // ngbmodal service
@@ -385,8 +444,8 @@ export class HQComponent implements OnInit {
   showError(headerText: string, bodyText: string) {
     this.toastService.show(bodyText, {
       classname: 'bg-danger text-light',
-      delay: 4000,
-      autohide: true,
+      delay: 10000,
+      autohide: false,
       headertext: headerText,
     });
   }

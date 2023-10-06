@@ -1,0 +1,41 @@
+.logo {
+  width: 100px;
+}
+
+q {
+  font-style: italic;
+  font-size: 1.2rem;
+  quotes: "« " " »";
+}
+
+.img-loading {
+  width: 30px;
+  height: 30px;
+}
+
+.img-responsive {
+  width: 50px;
+  height: 50px;
+}
+
+.img-full {
+  width: 400px;
+  height: 617px;
+}
+
+.cdk-overlay-pane {
+  position: absolute;
+  pointer-events: auto;
+  box-sizing: border-box;
+  z-index: 1000;
+  display: flex;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+::ng-deep table.dataTable td.dataTables_empty {
+  display: none;
+}
+::ng-deep .cdk-overlay-container {
+  z-index: 2000;
+}

@@ -1,4 +1,4 @@
-import { Editora } from '@shared/models/editora';
+import { Editora } from '../../@shared/models/editora';
 
 export interface DataResponseEditora {
   succeeded: boolean;

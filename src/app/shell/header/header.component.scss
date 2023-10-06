@@ -1,5 +1,9 @@
-@import "src/theme/theme-variables";
+@import "../../theme/theme-variables";
+@import url("https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css");
 
+#primary-nav {
+  background-color: skyblue;
+}
 .navbar {
   margin-bottom: $spacer;
 }

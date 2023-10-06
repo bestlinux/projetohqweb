@@ -3,7 +3,7 @@
   <form [formGroup]="entryForm" novalidate>
     <div class="card">
       <div class="card-header">
-        <div class="float-left"><h3 class="text-info">Adicionar HQ</h3></div>
+        <div class="float-left"><h3 class="text-info">HQ</h3></div>
         <div class="float-right">
           <!-- HTML markup for form mode New or Edit -->
           <h5 class="text-warning font-italic">{{ formMode }}</h5>
@@ -98,6 +98,18 @@
                   <option *ngFor="let formato of formatos" [value]="formato.codigo">{{ formato.nome }}</option>
                 </select>
               </label>
+              <label for="preco" *ngIf="!this.isAddNew">Preço</label>
+              <label class="d-block" *ngIf="!this.isAddNew">
+                <input type="text" class="form-control" formControlName="preco" readonly />
+              </label>
+              <label for="dtPublicacao" *ngIf="!this.isAddNew">Data de Publicação</label>
+              <label class="d-block" *ngIf="!this.isAddNew">
+                <input type="text" class="form-control" formControlName="dtPublicacao" readonly />
+              </label>
+              <label for="capa" *ngIf="!this.isAddNew">Capa</label>
+              <label class="d-block" *ngIf="!this.isAddNew">
+                <img class="img-full" src="http://127.0.0.1:8010/Capas/{{ capa }}" alt="Angular" />
+              </label>
             </div>
             <div class="col-sm">
               <label for="anoLancamento" *ngIf="this.isAddNew">Ano de Lançamento</label>
@@ -155,12 +167,37 @@
                   <option *ngFor="let lido of lidos" [value]="lido.codigo">{{ lido.nome }}</option>
                 </select>
               </label>
+              <label for="licenciador" *ngIf="!this.isAddNew">Licenciador</label>
+              <label class="d-block" *ngIf="!this.isAddNew">
+                <input type="text" class="form-control" formControlName="licenciador" readonly />
+              </label>
+              <label for="numeroPaginas" *ngIf="!this.isAddNew">Número de Páginas</label>
+              <label class="d-block" *ngIf="!this.isAddNew">
+                <input type="text" class="form-control" formControlName="numeroPaginas" readonly />
+              </label>
+              <label for="personagens" *ngIf="!this.isAddNew">Personagens</label>
+              <label class="d-block" *ngIf="!this.isAddNew">
+                <textarea class="form-control" formControlName="personagens" rows="3" readonly></textarea>
+              </label>
+              <label for="roteiro" *ngIf="!this.isAddNew">Desenho/Roteiro/ArteFinal</label>
+              <label class="d-block" *ngIf="!this.isAddNew">
+                <textarea class="form-control" formControlName="roteiro" rows="6" readonly></textarea>
+              </label>
+              <button
+                (click)="onSearch()"
+                class="btn btn-danger w-20"
+                type="submit"
+                [disabled]="entryForm.invalid"
+                *ngIf="this.isAddNew"
+              >
+                <span translate><i class="fas fa-search"></i> Buscar</span>
+              </button>
             </div>
           </div>
           <div class="card-body">
             <div class="col-sm"></div>
           </div>
-          <div class="row">
+          <!-- <div class="row">
             <div class="col-sm">
               <div class="col-sm-3">
                 <button
@@ -170,11 +207,11 @@
                   [disabled]="entryForm.invalid"
                   *ngIf="this.isAddNew"
                 >
-                  <span translate><i class="fas fa-search"></i> Search</span>
+                  <span translate><i class="fas fa-search"></i> Buscar</span>
                 </button>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="container-fluid" *ngIf="this.readyToCreate">
@@ -223,6 +260,16 @@
                 <td mat-cell *matCellDef="let hq"><a href="{{hq.thumbCapa}}" target="_blank">Capa</a></td>
               </ng-container> -->
 
+              <ng-container matColumnDef="desejo">
+                <th mat-header-cell *matHeaderCellDef>Desejo</th>
+                <td mat-cell *matCellDef="let hq">
+                  <button (click)="desejoCreate(hq)" type="button" class="btn btn-primary">
+                    <span translate><i class="fas fa-lightbulb"></i> Desejo</span>
+                  </button>
+                  <div class="spinner-border" role="status" id="spinner" *ngIf="isLoadingDesejo"></div>
+                </td>
+              </ng-container>
+
               <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: 'true'"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumns" (click)="selection.toggle(row)"></tr>
               <tr class="mat-row" *matNoDataRow>
@@ -251,7 +298,7 @@
             [disabled]="!readyToCreate"
             *ngIf="this.readyToCreate"
           >
-            <span translate><i class="fas fa-plus"></i> Create</span>
+            <span translate><i class="fas fa-plus"></i> Adicionar</span>
           </button>
           <div class="spinner-border" role="status" id="spinner" *ngIf="isLoadingCreate"></div>
           <button
@@ -261,7 +308,7 @@
             [disabled]="entryForm.invalid || isAddNew"
             *ngIf="!this.isAddNew"
           >
-            <span translate><i class="fas fa-edit"></i> Update</span>
+            <span translate><i class="fas fa-edit"></i> Atualizar</span>
           </button>
           <!-- HTML markup for Delete button -->
           <button
@@ -271,12 +318,20 @@
             [disabled]="entryForm.invalid || isAddNew"
             *ngIf="!this.isAddNew"
           >
-            <span translate><i class="fas fa-trash-alt"></i> Delete</span>
+            <span translate><i class="fas fa-trash-alt"></i> Excluir</span>
           </button>
         </div>
         <div class="float-right">
           <!-- HTML markup for Back button -->
-          <a class="btn text-dark" [routerLink]="['/listahq']"><i class="fa fa-arrow-left"></i> Back</a>
+          <a class="btn text-dark" [routerLink]="['/listahq']" *ngIf="!this.voltarHqAvancado && !this.voltarHqLeitura"
+            ><i class="fa fa-arrow-left"></i> Back</a
+          >
+          <a class="btn text-dark" [routerLink]="['/listahqavancado']" *ngIf="this.voltarHqAvancado"
+            ><i class="fa fa-arrow-left"></i> Back</a
+          >
+          <a class="btn text-dark" [routerLink]="['/listaleitura']" *ngIf="this.voltarHqLeitura"
+            ><i class="fa fa-arrow-left"></i> Back</a
+          >
         </div>
       </div>
     </div>

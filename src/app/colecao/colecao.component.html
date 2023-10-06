@@ -1,0 +1,143 @@
+<div class="container-fluid">
+  <!-- HTML form mark up -->
+  <form [formGroup]="entryFormColecao" novalidate>
+    <div class="card">
+      <div class="card-header">
+        <div class="float-left"><h3 class="text-info">Colecao</h3></div>
+        <div class="float-right">
+          <!-- HTML markup for form mode New or Edit -->
+          <h5 class="text-warning font-italic">{{ formMode }}</h5>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="alert alert-danger" [hidden]="!error" translate>Erro ao realizar o upload</div>
+        <div class="form-group">
+          <label for="id">Id</label>
+          <label class="d-block">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="id"
+              autocomplete="id"
+              [placeholder]="'Auto Assigned Id' | translate"
+              readonly
+            />
+            <span hidden translate>Id</span>
+            <small
+              [hidden]="entryFormColecao.controls.id.valid || entryFormColecao.controls.id.untouched"
+              class="text-danger"
+              translate
+            >
+              Id é obrigatório
+            </small>
+          </label>
+          <label for="positionTitle">Descrição</label>
+
+          <label class="d-block">
+            <input type="text" class="form-control" formControlName="descricao" autocomplete="current-descricao" />
+            <span hidden translate>Descrição</span>
+            <small
+              [hidden]="entryFormColecao.controls.descricao.valid || entryFormColecao.controls.descricao.untouched"
+              class="text-danger"
+              translate
+            >
+              Descrição é obrigatório
+            </small>
+          </label>
+          <label for="arquivo">Arquivo</label>
+          <label class="d-block">
+            <input
+              #imageInput
+              hidden="true"
+              id="arquivo"
+              type="file"
+              onclick="this.value=null"
+              (change)="imageInputChange($event)"
+              accept="image/png, image/jpeg"
+            />
+            <button class="btn btn-primary" (click)="imageInput.click()">
+              <span translate><i class="far fa-image"></i> Escolha uma imagem (PNG, JPG)</span>
+            </button>
+            <div class="card-body">
+              <div class="col-sm"></div>
+            </div>
+            <mat-progress-bar mode="determinate" value="{{ progress }}"></mat-progress-bar>
+          </label>
+        </div>
+        <div class="card-body">
+          <div class="col-sm"></div>
+        </div>
+      </div>
+      <div class="modal fade" id="modalDetalhes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <img class="img-full" src="http://localhost:8010/Colecao/{{ imagem }}" alt="Angular" />
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="card">
+          <div class="card-header">
+            <div class="float-left"><h3 class="text-info">Colecao</h3></div>
+            <div class="float-right">
+              <!-- Add button with routerLink to the detail page -->
+              <!--<a class="btn btn-primary" [routerLink]="['/hq']"><i class="fa fa-plus"></i> Add</a> -->
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive-sm">
+              <!-- Angular Datatables server side paging -->
+              <!-- <table datatable [dtOptions]="dtOptions" class="row-border hover">
+                <thead>
+                  <tr>
+                    <th>Descricao</th>
+                    <th>Imagem</th>
+                    <th>Excluir</th>
+                  </tr>
+                </thead>
+                <tbody *ngIf="colecoes?.length != 0">
+                  <tr *ngFor="let colecao of colecoes">
+                    <td>{{ colecao.descricao }}</td>
+                    <td>
+                      <button
+                        (click)="exibeImagemFull(colecao.arquivo)"
+                        type="button"
+                        class="btn btn-primary"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalDetalhes"
+                      >
+                        <span translate><i class="far fa-image"></i> Foto</span>
+                      </button>
+                    </td>
+                    <td>
+                      <button (click)="onDelee(colecao.id)" class="btn btn-danger w-20" type="button">
+                        <span translate><i class="fas fa-trash-alt"></i> Excluir</span>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+                <tbody *ngIf="colecoes?.length == 0">
+                  <tr>
+                    <td colspan="3" class="no-data-available">No data!</td>
+                  </tr>
+                </tbody>
+              </table> -->
+            </div>
+          </div>
+          <div class="card-footer">*Campos de busca são Descricao</div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <a class="btn text-dark" [routerLink]="['/listahq']"><i class="fa fa-arrow-left"></i> Back</a>
+      </div>
+    </div>
+  </form>
+</div>

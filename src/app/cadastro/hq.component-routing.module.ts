@@ -7,7 +7,8 @@ import { HQComponent } from './hq.component';
 const routes: Routes = [
   // Module is lazy loaded, see app-routing.module.ts
   { path: '', component: HQComponent, data: { title: marker('Adicionar HQ') } },
-  { path: ':id', component: HQComponent, data: { title: marker('Adicionar HQ') } },
+  { path: ':id', component: HQComponent, data: { title: marker('Editar HQ') } },
+  { path: ':id/:rota', component: HQComponent },
 ];
 
 @NgModule({

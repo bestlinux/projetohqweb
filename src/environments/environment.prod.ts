@@ -9,9 +9,9 @@ import { env } from './.env';
 export const environment = {
   production: true,
   version: env.npm_package_version,
-  serverUrl: 'https://api.chucknorris.io',
-  defaultLanguage: 'en-US',
+  serverUrl: '/api',
+  defaultLanguage: 'pt-BR',
   supportedLanguages: ['en-US', 'pt-BR'],
-  Api_Endpoint: 'https://localhost:44378/api/v1',
+  Api_Endpoint: 'https://localhost:8001/api/v1',
   Api_Mock_Endpoint: 'https://angular-datatables-demo-server.herokuapp.com',
 };
